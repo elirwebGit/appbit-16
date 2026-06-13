@@ -1,0 +1,8 @@
+{
+  "name": "appbit-16",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
