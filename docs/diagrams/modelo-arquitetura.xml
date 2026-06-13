@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Hexagonal Architecture" id="0">
+    <mxGraphModel dx="878" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pwa" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="React PWA&#xa;TypeScript&#xa;Service Worker" vertex="1">
+          <mxGeometry height="80" width="220" x="420" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="express" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Inbound Adapter&#xa;Express API&#xa;Controllers&#xa;Middlewares" vertex="1">
+          <mxGeometry height="100" width="260" x="400" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="application" parent="1" style="shape=hexagon;whiteSpace=wrap;html=1;strokeWidth=2;" value="APPLICATION&#xa;&#xa;CreateRequestUseCase&#xa;UpdateRequestUseCase&#xa;ListRequestUseCase" vertex="1">
+          <mxGeometry height="140" width="400" x="330" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="domain" parent="1" style="shape=hexagon;whiteSpace=wrap;html=1;strokeWidth=3;" value="DOMAIN&#xa;&#xa;Entities&#xa;Value Objects&#xa;Business Rules" vertex="1">
+          <mxGeometry height="140" width="400" x="330" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ports" parent="1" style="shape=hexagon;whiteSpace=wrap;html=1;strokeWidth=2;" value="OUTPUT PORTS&#xa;&#xa;RequestRepository&#xa;NotificationPort" vertex="1">
+          <mxGeometry height="140" width="400" x="330" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="prisma" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Outbound Adapter&#xa;Prisma Repository" vertex="1">
+          <mxGeometry height="90" width="220" x="120" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="email" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Outbound Adapter&#xa;Email Service" vertex="1">
+          <mxGeometry height="90" width="220" x="720" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;" value="PostgreSQL" vertex="1">
+          <mxGeometry height="80" width="180" x="140" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="pwa" style="endArrow=block;html=1;" target="express">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="express" style="endArrow=block;html=1;" target="application">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="application" style="endArrow=block;html=1;" target="domain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="domain" style="endArrow=block;html=1;" target="ports">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="ports" style="endArrow=block;html=1;" target="prisma">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="ports" style="endArrow=block;html=1;" target="email">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="prisma" style="endArrow=block;html=1;" target="postgres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
