@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { MapPin, ShieldAlert, Briefcase, GraduationCap, MessagesSquare, Bot } from 'lucide-react'
 import MapaVisent from './components/MapaVisent'
-
-interface Mensagem {
-  id: number;
-  autor: 'usuario' | 'ia';
-  texto: string;
-}
+import type { Mensagem } from './types/visent'
 
 export default function App() {
   const [mensagens, setMensagens] = useState<Mensagem[]>([

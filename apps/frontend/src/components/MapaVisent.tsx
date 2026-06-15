@@ -16,27 +16,10 @@ const IconeCustomizado = L.icon({
   iconAnchor: [12, 41],
 })
 
-// Dados do Eixo Sudeste alinhados perfeitamente com o Terminal de IA
-const dadosRegioes = [
-  {
-    id: 1,
-    nome: "São Paulo - Zona Sul",
-    posicao: [-23.6544, -46.6611] as [number, number],
-    cobertura: "3G / Sinal Escasso",
-    densidade: "Alta (85k pessoas)",
-    empregabilidade: "0.42 (Baixa)",
-    status: "critico"
-  },
-  {
-    id: 2,
-    nome: "Rio de Janeiro - Centro",
-    posicao: [-22.9035, -43.1729] as [number, number],
-    cobertura: "5G / Excelente",
-    densidade: "Média (120k pessoas)",
-    empregabilidade: "0.78 (Alta)",
-    status: "estavel"
-  }
-]
+import type { RegiaoMapa } from '../types/visent'
+import dadosMapa from '../../../../data/mock/mapa.json'
+
+const dadosRegioes: RegiaoMapa[] = dadosMapa.regioes as RegiaoMapa[]
 
 export default function MapaVisent() {
   // Centro estratégico entre SP e RJ para os dois aparecerem na tela ao mesmo tempo
@@ -56,13 +39,13 @@ export default function MapaVisent() {
 
       {dadosRegioes.map((regiao) => {
         // Define a cor da mancha com base no status do MVP
-        const corIndicador = regiao.status === 'critico' ? '#ef4444' : '#22c55e';
+        const corIndicador = regiao.indicadores.empregabilidade < 0.5 ? '#ef4444' : '#22c55e';
 
         return (
-          <Fragment key={regiao.id}>
+          <Fragment key={regiao.regiao}>
             {/* Círculo indicador de cobertura e vulnerabilidade social */}
             <Circle
-              center={regiao.posicao}
+              center={[regiao.lat, regiao.lng]}
               radius={28000} // Tamanho da mancha no mapa
               pathOptions={{
                 color: corIndicador,
@@ -73,20 +56,20 @@ export default function MapaVisent() {
             />
 
             {/* Marcador Interativo */}
-            <Marker position={regiao.posicao} icon={IconeCustomizado}>
+            <Marker position={[regiao.lat, regiao.lng]} icon={IconeCustomizado}>
               <Popup>
                 <div style={{ color: '#000', fontFamily: 'sans-serif', minWidth: '160px' }}>
-                  <strong style={{ fontSize: '13px', color: '#1e293b' }}>{regiao.nome}</strong>
+                  <strong style={{ fontSize: '13px', color: '#1e293b' }}>{regiao.nome_exibicao}</strong>
                   <hr style={{ margin: '5px 0', border: '0', borderTop: '1px solid #e2e8f0' }} />
                   
                   <p style={{ margin: '3px 0', fontSize: '11px' }}>
-                    <strong>População:</strong> {regiao.densidade}
+                    <strong>População:</strong> {regiao.concentracao_pessoas.toLocaleString('pt-BR')} pessoas
                   </p>
                   <p style={{ margin: '3px 0', fontSize: '11px' }}>
-                    <strong>Sinal Móvel:</strong> {regiao.cobertura}
+                    <strong>Sinal Móvel:</strong> {regiao.cobertura_rede} (Qualidade: {Math.round(regiao.qualidade_sinal * 100)}%)
                   </p>
                   <p style={{ margin: '3px 0', fontSize: '11px' }}>
-                    <strong>Empregabilidade:</strong> {regiao.empregabilidade}
+                    <strong>Empregabilidade:</strong> {regiao.indicadores.empregabilidade}
                   </p>
                 </div>
               </Popup>

@@ -43,8 +43,6 @@ Endpoint principal. Recebe uma pergunta em linguagem natural e retorna dados est
   "dados": [
     {
       "regiao": "SP-ZonaSul",
-      "lat": -23.65,
-      "lng": -46.66,
       "indicador": "empregabilidade",
       "valor": 0.42,
       "concentracao_pessoas": 85000,
@@ -53,8 +51,8 @@ Endpoint principal. Recebe uma pergunta em linguagem natural e retorna dados est
     }
   ],
   "fontes": [
-    { "nome": "Vísent CDRView", "url": "github.com/wongola-bit/appbit-hackathon" },
-    { "nome": "IBGE", "url": "ibge.gov.br" }
+    { "nome": "Vísent CDRView", "url": "https://github.com/wongola-bit/appbit" },
+    { "nome": "IBGE", "url": "https://ibge.gov.br" }
   ],
   "timestamp": "2026-06-11T12:00:00Z"
 }
@@ -76,8 +74,6 @@ GET /mapa?regiao=SP&indicador=empregabilidade
 |---|---|---|---|
 | `regiao` | string | ❌ | Filtro por UF ou região |
 | `indicador` | string | ❌ | Filtro por indicador |
-| `page` | number | ❌ | Número da página (default: 1) |
-| `limit` | number | ❌ | Quantidade de itens (default: 100) |
 
 ### Response
 
@@ -87,10 +83,12 @@ GET /mapa?regiao=SP&indicador=empregabilidade
   "regioes": [
     {
       "regiao": "SP-ZonaSul",
+      "nome_exibicao": "São Paulo — Zona Sul",
       "lat": -23.65,
       "lng": -46.66,
       "concentracao_pessoas": 85000,
       "cobertura_rede": "4G",
+      "qualidade_sinal": 0.72,
       "indicadores": {
         "empregabilidade": 0.42,
         "saude_mental": 0.67
@@ -114,15 +112,24 @@ Retorna metadados dos indicadores disponíveis e regiões suportadas.
     {
       "id": "empregabilidade",
       "nome": "Empregabilidade",
-      "descricao": "Taxa de emprego vs concentração de pessoas"
+      "descricao": "Taxa de emprego vs concentração de pessoas",
+      "unidade": "percentual",
+      "faixa": { "min": 0, "max": 1 }
     },
     {
       "id": "saude_mental",
       "nome": "Saúde Mental",
-      "descricao": "Indicadores de saúde vs cobertura de rede"
+      "descricao": "Indicadores de saúde vs cobertura de rede",
+      "unidade": "percentual",
+      "faixa": { "min": 0, "max": 1 }
     }
   ],
-  "regioes_disponiveis": ["SP", "RJ", "MG", "BA"]
+  "regioes_disponiveis": [
+    { "id": "SP", "nome": "São Paulo" },
+    { "id": "RJ", "nome": "Rio de Janeiro" },
+    { "id": "MG", "nome": "Minas Gerais" },
+    { "id": "BA", "nome": "Bahia" }
+  ]
 }
 ```
 

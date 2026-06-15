@@ -22,15 +22,12 @@ Utilizar **monorepo** com diretórios separados: `/frontend`, `/backend`, `/docs
 ## Estrutura
 
 ```
-appbit-16/
-├── apps/
-│   ├── api/          # Express 5.x + Hexagonal + Prisma (backend)
-│   └── frontend/     # React + Vite + TypeScript (a ser adicionado)
-├── docs/             # Documentação + ADRs + Contratos de API
-└── package.json      # npm workspaces: gerencia apps/* como pacotes
+appbit-b2g-equipe16/
+├── frontend/     # React + Vite + TypeScript
+├── backend/      # Fastify + Hexagonal
+├── data/         # Datasets e scripts de seed
+└── docs/         # Documentação + ADRs
 ```
-
-> A estrutura usa **npm workspaces** (configurado no `package.json` raiz com `"workspaces": ["apps/*"]`), o que permite rodar `npm install` uma vez na raiz e gerenciar as dependências de toda a estrutura.
 
 ## Consequências
 

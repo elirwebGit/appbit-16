@@ -1,10 +1,8 @@
 # ADR-002 — Fastify
 
 **Data**: 2026-06-12
-**Status**: ~~✅ Aceita~~ → ⛔ Superseded por [ADR-002-express.md](./ADR-002-express.md)
+**Status**: ✅ Aceita
 **Autor**: Elir
-
-> ⚠️ **Esta decisão foi revisada.** O time optou por usar Express 5.x no lugar do Fastify para reduzir a curva de aprendizado. Ver ADR-002-express.md.
 
 ## Contexto
 
