@@ -1,0 +1,44 @@
+{
+  "resposta_ia": "Identificamos 3 regiões críticas onde o índice de saúde mental é baixo E a cobertura de rede é insuficiente para teleatendimento:\n\n1. **Salvador — Subúrbio Ferroviário** (BA) — Índice de saúde mental: 0.28 (o mais baixo de toda a base). Cobertura apenas 2G, impossibilitando videochamadas para telepsicologia. 92.000 pessoas afetadas.\n\n2. **Rio de Janeiro — Zona Oeste** — Índice: 0.39. Cobertura 3G instável (30% de qualidade). 110.000 pessoas sem acesso viável a teleatendimento.\n\n3. **São Paulo — Zona Leste** — Índice: 0.45. Cobertura 3G com qualidade de 38%. Apesar de melhor que as anteriores, ainda insuficiente para atendimentos de vídeo estáveis.\n\n**Alerta**: Implementar programas de saúde mental remota nessas regiões sem antes resolver a infraestrutura de rede seria ineficaz. Recomenda-se uma abordagem combinada: expansão de rede + postos de atendimento presencial.",
+  "dados": [
+    {
+      "regiao": "BA-Suburbio",
+      "indicador": "saude_mental",
+      "valor": 0.28,
+      "concentracao_pessoas": 92000,
+      "cobertura_rede": "2G",
+      "fonte": "Vísent CDRView + DATASUS"
+    },
+    {
+      "regiao": "RJ-ZonaOeste",
+      "indicador": "saude_mental",
+      "valor": 0.39,
+      "concentracao_pessoas": 110000,
+      "cobertura_rede": "3G",
+      "fonte": "Vísent CDRView + DATASUS"
+    },
+    {
+      "regiao": "SP-ZonaLeste",
+      "indicador": "saude_mental",
+      "valor": 0.45,
+      "concentracao_pessoas": 120000,
+      "cobertura_rede": "3G",
+      "fonte": "Vísent CDRView + DATASUS"
+    }
+  ],
+  "fontes": [
+    {
+      "nome": "Vísent CDRView",
+      "url": "https://github.com/wongola-bit/appbit"
+    },
+    {
+      "nome": "DATASUS — Saúde Mental",
+      "url": "https://datasus.saude.gov.br"
+    },
+    {
+      "nome": "OMS — Mental Health Atlas",
+      "url": "https://www.who.int/teams/mental-health-and-substance-use"
+    }
+  ],
+  "timestamp": "2026-06-12T14:35:00Z"
+}

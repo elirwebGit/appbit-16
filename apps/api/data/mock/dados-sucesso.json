@@ -1,0 +1,44 @@
+{
+  "resposta_ia": "Na região metropolitana de São Paulo, identificamos 3 zonas críticas onde a concentração de pessoas é alta mas a cobertura de rede é insuficiente:\n\n1. **Zona Leste** — 120.000 pessoas concentradas com cobertura apenas 3G (qualidade 38%). A taxa de empregabilidade é de apenas 31%, sugerindo que a falta de conectividade pode estar impactando o acesso a oportunidades de trabalho remoto.\n\n2. **Zona Sul** — 85.000 pessoas com cobertura 4G parcial (72%). Embora melhor que a Zona Leste, o indicador de empregabilidade (42%) ainda está abaixo da média estadual.\n\nEm contraste, o **Centro de SP** tem cobertura 5G (95%) e empregabilidade de 78%, evidenciando a disparidade centro-periferia.\n\n**Recomendação**: Priorizar expansão de infraestrutura de rede na Zona Leste, onde o impacto social seria maior dado o volume populacional.",
+  "dados": [
+    {
+      "regiao": "SP-ZonaLeste",
+      "indicador": "empregabilidade",
+      "valor": 0.31,
+      "concentracao_pessoas": 120000,
+      "cobertura_rede": "3G",
+      "fonte": "Vísent CDRView + IBGE"
+    },
+    {
+      "regiao": "SP-ZonaSul",
+      "indicador": "empregabilidade",
+      "valor": 0.42,
+      "concentracao_pessoas": 85000,
+      "cobertura_rede": "4G",
+      "fonte": "Vísent CDRView + IBGE"
+    },
+    {
+      "regiao": "SP-Centro",
+      "indicador": "empregabilidade",
+      "valor": 0.78,
+      "concentracao_pessoas": 200000,
+      "cobertura_rede": "5G",
+      "fonte": "Vísent CDRView + IBGE"
+    }
+  ],
+  "fontes": [
+    {
+      "nome": "Vísent CDRView",
+      "url": "https://github.com/wongola-bit/appbit"
+    },
+    {
+      "nome": "IBGE — Censo 2022",
+      "url": "https://censo2022.ibge.gov.br"
+    },
+    {
+      "nome": "Anatel — Cobertura Móvel",
+      "url": "https://informacoes.anatel.gov.br"
+    }
+  ],
+  "timestamp": "2026-06-12T14:30:00Z"
+}

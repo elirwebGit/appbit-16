@@ -1,0 +1,215 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.66,
+          -23.65
+        ]
+      },
+      "properties": {
+        "regiao": "SP-ZonaSul",
+        "nome_exibicao": "São Paulo — Zona Sul",
+        "concentracao_pessoas": 85000,
+        "cobertura_rede": "4G",
+        "qualidade_sinal": 0.72,
+        "indicadores": {
+          "empregabilidade": 0.42,
+          "saude_mental": 0.67
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.47,
+          -23.54
+        ]
+      },
+      "properties": {
+        "regiao": "SP-ZonaLeste",
+        "nome_exibicao": "São Paulo — Zona Leste",
+        "concentracao_pessoas": 120000,
+        "cobertura_rede": "3G",
+        "qualidade_sinal": 0.38,
+        "indicadores": {
+          "empregabilidade": 0.31,
+          "saude_mental": 0.45
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.6333,
+          -23.5505
+        ]
+      },
+      "properties": {
+        "regiao": "SP-Centro",
+        "nome_exibicao": "São Paulo — Centro",
+        "concentracao_pessoas": 200000,
+        "cobertura_rede": "5G",
+        "qualidade_sinal": 0.95,
+        "indicadores": {
+          "empregabilidade": 0.78,
+          "saude_mental": 0.82
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.27,
+          -22.88
+        ]
+      },
+      "properties": {
+        "regiao": "RJ-ZonaNorte",
+        "nome_exibicao": "Rio de Janeiro — Zona Norte",
+        "concentracao_pessoas": 95000,
+        "cobertura_rede": "4G",
+        "qualidade_sinal": 0.55,
+        "indicadores": {
+          "empregabilidade": 0.38,
+          "saude_mental": 0.52
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.4,
+          -22.94
+        ]
+      },
+      "properties": {
+        "regiao": "RJ-ZonaOeste",
+        "nome_exibicao": "Rio de Janeiro — Zona Oeste",
+        "concentracao_pessoas": 110000,
+        "cobertura_rede": "3G",
+        "qualidade_sinal": 0.3,
+        "indicadores": {
+          "empregabilidade": 0.25,
+          "saude_mental": 0.39
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.1729,
+          -22.9068
+        ]
+      },
+      "properties": {
+        "regiao": "RJ-Centro",
+        "nome_exibicao": "Rio de Janeiro — Centro",
+        "concentracao_pessoas": 180000,
+        "cobertura_rede": "5G",
+        "qualidade_sinal": 0.91,
+        "indicadores": {
+          "empregabilidade": 0.73,
+          "saude_mental": 0.78
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.9345,
+          -19.9167
+        ]
+      },
+      "properties": {
+        "regiao": "MG-BH-Centro",
+        "nome_exibicao": "Belo Horizonte — Centro",
+        "concentracao_pessoas": 75000,
+        "cobertura_rede": "4G",
+        "qualidade_sinal": 0.68,
+        "indicadores": {
+          "empregabilidade": 0.55,
+          "saude_mental": 0.61
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.0539,
+          -19.932
+        ]
+      },
+      "properties": {
+        "regiao": "MG-Contagem",
+        "nome_exibicao": "Contagem — Região Metropolitana BH",
+        "concentracao_pessoas": 45000,
+        "cobertura_rede": "3G",
+        "qualidade_sinal": 0.42,
+        "indicadores": {
+          "empregabilidade": 0.34,
+          "saude_mental": 0.48
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.5124,
+          -12.9714
+        ]
+      },
+      "properties": {
+        "regiao": "BA-Salvador-Centro",
+        "nome_exibicao": "Salvador — Centro Histórico",
+        "concentracao_pessoas": 68000,
+        "cobertura_rede": "4G",
+        "qualidade_sinal": 0.6,
+        "indicadores": {
+          "empregabilidade": 0.47,
+          "saude_mental": 0.58
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.48,
+          -12.89
+        ]
+      },
+      "properties": {
+        "regiao": "BA-Suburbio",
+        "nome_exibicao": "Salvador — Subúrbio Ferroviário",
+        "concentracao_pessoas": 92000,
+        "cobertura_rede": "2G",
+        "qualidade_sinal": 0.18,
+        "indicadores": {
+          "empregabilidade": 0.19,
+          "saude_mental": 0.28
+        }
+      }
+    }
+  ]
+}

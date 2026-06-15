@@ -1,0 +1,24 @@
+{
+  "indicadores": [
+    {
+      "id": "empregabilidade",
+      "nome": "Empregabilidade",
+      "descricao": "Taxa de emprego formal vs concentração de pessoas na região",
+      "unidade": "percentual",
+      "faixa": { "min": 0, "max": 1 }
+    },
+    {
+      "id": "saude_mental",
+      "nome": "Saúde Mental",
+      "descricao": "Índice de acesso a serviços de saúde mental vs cobertura de rede para teleatendimento",
+      "unidade": "percentual",
+      "faixa": { "min": 0, "max": 1 }
+    }
+  ],
+  "regioes_disponiveis": [
+    { "id": "SP", "nome": "São Paulo" },
+    { "id": "RJ", "nome": "Rio de Janeiro" },
+    { "id": "MG", "nome": "Minas Gerais" },
+    { "id": "BA", "nome": "Bahia" }
+  ]
+}
