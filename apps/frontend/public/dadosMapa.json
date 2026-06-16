@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "regiao": "São Paulo - Zona Sul",
+    "lat": -23.6544,
+    "lng": -46.6611,
+    "cobertura_rede": "3G / Escassa",
+    "concentracao_pessoas": "Alta (85k pessoas)",
+    "empregabilidade": "0.42 (Baixa)",
+    "status": "critico"
+  },
+  {
+    "id": 2,
+    "regiao": "Rio de Janeiro - Centro",
+    "lat": -22.9035,
+    "lng": -43.1729,
+    "cobertura_rede": "5G / Excelente",
+    "concentracao_pessoas": "Média (120k pessoas)",
+    "empregabilidade": "0.78 (Alta)",
+    "status": "estavel"
+  }
+]

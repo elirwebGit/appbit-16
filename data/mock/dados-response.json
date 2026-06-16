@@ -1,0 +1,150 @@
+{
+  "_descricao": "Mock de respostas para POST /dados. Cada chave simula uma pergunta diferente.",
+
+  "consultas": [
+    {
+      "_cenario": "Pergunta sobre conectividade — caso principal do MVP",
+      "request": {
+        "consulta": "Onde existe baixa conectividade e alta concentração de pessoas?",
+        "filtros": {
+          "regiao": "SP",
+          "indicador": "empregabilidade"
+        },
+        "idioma": "pt"
+      },
+      "response": {
+        "resposta_ia": "Na região metropolitana de São Paulo, identificamos 3 zonas críticas onde a concentração de pessoas é alta mas a cobertura de rede é insuficiente:\n\n1. **Zona Leste** — 120.000 pessoas concentradas com cobertura apenas 3G (qualidade 38%). A taxa de empregabilidade é de apenas 31%, sugerindo que a falta de conectividade pode estar impactando o acesso a oportunidades de trabalho remoto.\n\n2. **Zona Sul** — 85.000 pessoas com cobertura 4G parcial (72%). Embora melhor que a Zona Leste, o indicador de empregabilidade (42%) ainda está abaixo da média estadual.\n\nEm contraste, o **Centro de SP** tem cobertura 5G (95%) e empregabilidade de 78%, evidenciando a disparidade centro-periferia.\n\n**Recomendação**: Priorizar expansão de infraestrutura de rede na Zona Leste, onde o impacto social seria maior dado o volume populacional.",
+        "dados": [
+          {
+            "regiao": "SP-ZonaLeste",
+            "indicador": "empregabilidade",
+            "valor": 0.31,
+            "concentracao_pessoas": 120000,
+            "cobertura_rede": "3G",
+            "fonte": "Vísent CDRView + IBGE"
+          },
+          {
+            "regiao": "SP-ZonaSul",
+            "indicador": "empregabilidade",
+            "valor": 0.42,
+            "concentracao_pessoas": 85000,
+            "cobertura_rede": "4G",
+            "fonte": "Vísent CDRView + IBGE"
+          },
+          {
+            "regiao": "SP-Centro",
+            "indicador": "empregabilidade",
+            "valor": 0.78,
+            "concentracao_pessoas": 200000,
+            "cobertura_rede": "5G",
+            "fonte": "Vísent CDRView + IBGE"
+          }
+        ],
+        "fontes": [
+          { "nome": "Vísent CDRView", "url": "https://github.com/wongola-bit/appbit" },
+          { "nome": "IBGE — Censo 2022", "url": "https://censo2022.ibge.gov.br" },
+          { "nome": "Anatel — Cobertura Móvel", "url": "https://informacoes.anatel.gov.br" }
+        ],
+        "timestamp": "2026-06-12T14:30:00Z"
+      }
+    },
+    {
+      "_cenario": "Pergunta sobre saúde mental — segundo indicador do MVP",
+      "request": {
+        "consulta": "Quais regiões têm pior acesso a saúde mental e não possuem rede para teleatendimento?",
+        "filtros": {
+          "indicador": "saude_mental"
+        },
+        "idioma": "pt"
+      },
+      "response": {
+        "resposta_ia": "Identificamos 3 regiões críticas onde o índice de saúde mental é baixo E a cobertura de rede é insuficiente para teleatendimento:\n\n1. **Salvador — Subúrbio Ferroviário** (BA) — Índice de saúde mental: 0.28 (o mais baixo de toda a base). Cobertura apenas 2G, impossibilitando videochamadas para telepsicologia. 92.000 pessoas afetadas.\n\n2. **Rio de Janeiro — Zona Oeste** — Índice: 0.39. Cobertura 3G instável (30% de qualidade). 110.000 pessoas sem acesso viável a teleatendimento.\n\n3. **São Paulo — Zona Leste** — Índice: 0.45. Cobertura 3G com qualidade de 38%. Apesar de melhor que as anteriores, ainda insuficiente para atendimentos de vídeo estáveis.\n\n**Alerta**: Implementar programas de saúde mental remota nessas regiões sem antes resolver a infraestrutura de rede seria ineficaz. Recomenda-se uma abordagem combinada: expansão de rede + postos de atendimento presencial.",
+        "dados": [
+          {
+            "regiao": "BA-Suburbio",
+            "indicador": "saude_mental",
+            "valor": 0.28,
+            "concentracao_pessoas": 92000,
+            "cobertura_rede": "2G",
+            "fonte": "Vísent CDRView + DATASUS"
+          },
+          {
+            "regiao": "RJ-ZonaOeste",
+            "indicador": "saude_mental",
+            "valor": 0.39,
+            "concentracao_pessoas": 110000,
+            "cobertura_rede": "3G",
+            "fonte": "Vísent CDRView + DATASUS"
+          },
+          {
+            "regiao": "SP-ZonaLeste",
+            "indicador": "saude_mental",
+            "valor": 0.45,
+            "concentracao_pessoas": 120000,
+            "cobertura_rede": "3G",
+            "fonte": "Vísent CDRView + DATASUS"
+          }
+        ],
+        "fontes": [
+          { "nome": "Vísent CDRView", "url": "https://github.com/wongola-bit/appbit" },
+          { "nome": "DATASUS — Saúde Mental", "url": "https://datasus.saude.gov.br" },
+          { "nome": "OMS — Mental Health Atlas", "url": "https://www.who.int/teams/mental-health-and-substance-use" }
+        ],
+        "timestamp": "2026-06-12T14:35:00Z"
+      }
+    },
+    {
+      "_cenario": "Pergunta comparativa entre regiões — testa tabelas e gráficos comparativos",
+      "request": {
+        "consulta": "Compare São Paulo e Salvador em termos de empregabilidade e cobertura de rede",
+        "filtros": {
+          "regiao": "SP,BA",
+          "indicador": "empregabilidade"
+        },
+        "idioma": "pt"
+      },
+      "response": {
+        "resposta_ia": "**Comparativo São Paulo × Salvador — Empregabilidade e Conectividade**\n\n| Métrica | SP (média) | BA (média) | Diferença |\n|---|---|---|---|\n| Empregabilidade | 0.50 | 0.33 | SP +52% |\n| Cobertura predominante | 4G | 3G | SP 1 geração à frente |\n| Concentração média | 135.000 | 80.000 | SP +69% |\n| Qualidade do sinal | 0.68 | 0.39 | SP +74% |\n\n**Análise**: Salvador apresenta um déficit significativo tanto em conectividade quanto em empregabilidade. A correlação entre os dois indicadores sugere que a falta de infraestrutura digital pode ser um fator limitante para o acesso a oportunidades de emprego formal, especialmente no Subúrbio Ferroviário onde ambos indicadores atingem os valores mais baixos da base.\n\n**Recomendação**: Salvador deve ser prioridade para investimentos em infraestrutura digital, com foco no Subúrbio Ferroviário.",
+        "dados": [
+          {
+            "regiao": "SP-Centro",
+            "indicador": "empregabilidade",
+            "valor": 0.78,
+            "concentracao_pessoas": 200000,
+            "cobertura_rede": "5G",
+            "fonte": "Vísent CDRView + IBGE"
+          },
+          {
+            "regiao": "SP-ZonaLeste",
+            "indicador": "empregabilidade",
+            "valor": 0.31,
+            "concentracao_pessoas": 120000,
+            "cobertura_rede": "3G",
+            "fonte": "Vísent CDRView + IBGE"
+          },
+          {
+            "regiao": "BA-Salvador-Centro",
+            "indicador": "empregabilidade",
+            "valor": 0.47,
+            "concentracao_pessoas": 68000,
+            "cobertura_rede": "4G",
+            "fonte": "Vísent CDRView + IBGE"
+          },
+          {
+            "regiao": "BA-Suburbio",
+            "indicador": "empregabilidade",
+            "valor": 0.19,
+            "concentracao_pessoas": 92000,
+            "cobertura_rede": "2G",
+            "fonte": "Vísent CDRView + IBGE"
+          }
+        ],
+        "fontes": [
+          { "nome": "Vísent CDRView", "url": "https://github.com/wongola-bit/appbit" },
+          { "nome": "IBGE — Censo 2022", "url": "https://censo2022.ibge.gov.br" }
+        ],
+        "timestamp": "2026-06-12T14:40:00Z"
+      }
+    }
+  ]
+}

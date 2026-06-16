@@ -1,0 +1,48 @@
+{
+  "resposta_ia": "**Comparativo São Paulo × Salvador — Empregabilidade e Conectividade**\n\n| Métrica | SP (média) | BA (média) | Diferença |\n|---|---|---|---|\n| Empregabilidade | 0.50 | 0.33 | SP +52% |\n| Cobertura predominante | 4G | 3G | SP 1 geração à frente |\n| Concentração média | 135.000 | 80.000 | SP +69% |\n| Qualidade do sinal | 0.68 | 0.39 | SP +74% |\n\n**Análise**: Salvador apresenta um déficit significativo tanto em conectividade quanto em empregabilidade. A correlação entre os dois indicadores sugere que a falta de infraestrutura digital pode ser um fator limitante para o acesso a oportunidades de emprego formal, especialmente no Subúrbio Ferroviário onde ambos indicadores atingem os valores mais baixos da base.\n\n**Recomendação**: Salvador deve ser prioridade para investimentos em infraestrutura digital, com foco no Subúrbio Ferroviário.",
+  "dados": [
+    {
+      "regiao": "SP-Centro",
+      "indicador": "empregabilidade",
+      "valor": 0.78,
+      "concentracao_pessoas": 200000,
+      "cobertura_rede": "5G",
+      "fonte": "Vísent CDRView + IBGE"
+    },
+    {
+      "regiao": "SP-ZonaLeste",
+      "indicador": "empregabilidade",
+      "valor": 0.31,
+      "concentracao_pessoas": 120000,
+      "cobertura_rede": "3G",
+      "fonte": "Vísent CDRView + IBGE"
+    },
+    {
+      "regiao": "BA-Salvador-Centro",
+      "indicador": "empregabilidade",
+      "valor": 0.47,
+      "concentracao_pessoas": 68000,
+      "cobertura_rede": "4G",
+      "fonte": "Vísent CDRView + IBGE"
+    },
+    {
+      "regiao": "BA-Suburbio",
+      "indicador": "empregabilidade",
+      "valor": 0.19,
+      "concentracao_pessoas": 92000,
+      "cobertura_rede": "2G",
+      "fonte": "Vísent CDRView + IBGE"
+    }
+  ],
+  "fontes": [
+    {
+      "nome": "Vísent CDRView",
+      "url": "https://github.com/wongola-bit/appbit"
+    },
+    {
+      "nome": "IBGE — Censo 2022",
+      "url": "https://censo2022.ibge.gov.br"
+    }
+  ],
+  "timestamp": "2026-06-12T14:40:00Z"
+}
