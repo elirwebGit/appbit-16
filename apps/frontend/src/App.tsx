@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { MapPin, ShieldAlert, Briefcase, GraduationCap, MessagesSquare, Bot } from 'lucide-react'
 import MapaVisent from './components/MapaVisent'
 import type { Mensagem } from './types/visent'
+import OfflineBanner from './components/OfflineBanner'
+import ReloadPrompt from './components/ReloadPrompt'
 
 export default function App() {
   const [mensagens, setMensagens] = useState<Mensagem[]>([
@@ -44,7 +46,7 @@ export default function App() {
 
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw', fontFamily: 'sans-serif', backgroundColor: '#0f172a', color: '#f8fafc', margin: 0, overflow: 'hidden' }}>
-      
+      <OfflineBanner />
       {/* Barra Lateral de Navegação */}
       <aside style={{ width: '260px', backgroundColor: '#1e293b', padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', borderRight: '1px solid #334155' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#38bdf8', marginBottom: '20px' }}>App BiT — B2G</h2>
@@ -129,6 +131,7 @@ export default function App() {
         </form>
 
       </main>
+      <ReloadPrompt />
     </div>
   )
 }
