@@ -8,6 +8,7 @@
     "start": "node dist/main/server.js"
   },
   "dependencies": {
+    "@google/genai": "^2.9.0",
     "@prisma/client": "^6.19.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -9,10 +8,11 @@ datasource db {
 }
 
 model Region {
-  id      String @id @default(uuid())
-  name    String
-  state   String
-  country String
+  id         String            @id @default(uuid())
+  name       String
+  state      String
+  country    String
+  indicators RegionIndicator[]
 }
 
 model Formation {
@@ -24,11 +24,29 @@ model Formation {
   regionId    String
 }
 
-model Employment {
+model RegionIndicator {
   id                  String @id @default(uuid())
+  indicator           String
+  value               Float
+  peopleConcentration Int
+  networkCoverage     String
+  source              String
   regionId            String
-  unemploymentRate    Float
+  region              Region @relation(fields: [regionId], references: [id])
+}
+
+model AIAnalysis {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String   @db.Text
+  createdAt DateTime @default(now())
+}
+
+model Employment {
+  id                   String @id @default(uuid())
+  regionId             String
+  unemploymentRate     Float
   formalEmploymentRate Float
-  sector              String
-  demographicGroup    String
+  sector               String
+  demographicGroup     String
 }

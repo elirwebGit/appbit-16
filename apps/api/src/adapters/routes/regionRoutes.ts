@@ -1,40 +1,49 @@
 import { Router } from "express";
+
 import { RegionController } from "../controllers/RegionController";
-import { GetRegionsUseCase } from "../../application/useCases/GetRegionsUseCase";
-import { InMemoryRegionRepository } from "../../infrastructure/repositories/InMemoryRegionRepository";
 
-const router = Router();
+import { PrismaRegionRepository } from "@infrastructure/repositories/PrismaRegionRepository";
+import { AskQuestionRegionUseCase } from "@application/useCases/AskQuestionRegionUseCase";
+import { GeminiProvider } from "@infrastructure/ai/GeminiProvider";
+import { PrismaAIAnalysisRepository } from "@infrastructure/repositories/PrismaAIAnalysisRepository";
 
-const regionRepository = new InMemoryRegionRepository();
-const getRegionsUseCase = new GetRegionsUseCase(regionRepository);
-const regionController = new RegionController(getRegionsUseCase);
+const region = Router();
+
+const regionRepository = new PrismaRegionRepository();
+const geminiProvider = new GeminiProvider();
+const analysisRepository = new PrismaAIAnalysisRepository();
+
+const askQuestionRegionUseCase = new AskQuestionRegionUseCase(
+  geminiProvider,
+  regionRepository,
+  analysisRepository,
+);
+
+const regionController = new RegionController(askQuestionRegionUseCase);
 
 /**
  * @openapi
- * /regions:
- *   get:
- *     summary: Lista todas as regiões
+ * /regions/analysis:
+ *   post:
+ *     summary: Analisa indicadores regionais utilizando IA
  *     tags:
  *       - Regions
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question:
+ *                 type: string
+ *                 example: Qual região deve receber prioridade de investimento?
  *     responses:
  *       200:
- *         description: Lista de regiões
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: string
- *                   name:
- *                     type: string
- *                   state:
- *                     type: string
- *                   country:
- *                     type: string
+ *         description: Análise gerada pela IA
  */
-router.get("/regions", (req, res) => regionController.getAll(req, res));
+region.post("/regions/analysis", (req, res) =>
+  regionController.analyze(req, res),
+);
 
-export { router };
+export { region };

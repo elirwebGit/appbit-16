@@ -1,8 +1,10 @@
 import express from "express";
-import { router } from "../adapters/routes/regionRoutes";
+import { region } from "../adapters/routes/regionRoutes";
 
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger";
+import { aiRouter } from "@adapters/routes/aiRoutes";
+import { analysisRouter } from "@adapters/routes/aiAnalyseRoute";
 
 const app = express();
 
@@ -12,7 +14,10 @@ app.use(express.json());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
-app.use("/api", router);
+app.use("/api", region);
+app.use("/api", analysisRouter);
+
+app.use("/api/ai", aiRouter);
 
 // Health
 app.get("/health", (_req, res) => {
