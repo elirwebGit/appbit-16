@@ -1,5 +1,5 @@
 import { GeminiProvider } from "@infrastructure/ai/GeminiProvider";
-
+/* este é mock  */
 export class AskQuestionUseCase {
   constructor(private readonly aiProvider: GeminiProvider) {}
 

@@ -5,19 +5,32 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger";
 import { aiRouter } from "@adapters/routes/aiRoutes";
 import { analysisRouter } from "@adapters/routes/aiAnalyseRoute";
-
+import { crossRegionRouter } from "@adapters/routes/crossRegionRoute";
+import { dashboardRouter } from "@adapters/routes/dashboardRouter";
+import { regionIndicatorsRouter } from "@adapters/routes/regionIndicatorsRouter";
+import cors from "cors";
 const app = express();
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend (Vite)
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }),
+);
 
 // Swagger
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
-app.use("/api", region);
-app.use("/api", analysisRouter);
+app.use("/api/regions", region);
+app.use("/api/analysis", analysisRouter);
+app.use("/api/cross-region", crossRegionRouter);
+app.use("/api/dashboard", dashboardRouter);
+app.use("/api/region", regionIndicatorsRouter);
 
-app.use("/api/ai", aiRouter);
+app.use("/api/ai", aiRouter); // vou remover
 
 // Health
 app.get("/health", (_req, res) => {

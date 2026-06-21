@@ -3,12 +3,13 @@ import { Router } from "express";
 import { AIAnalysisController } from "../controllers/AIAnalysisController";
 
 import { PrismaAIAnalysisRepository } from "@infrastructure/repositories/PrismaAIAnalysisRepository";
+import { GetAnalysisHistoryUseCase } from "@application/useCases/GetAnalysisHistoryUseCase";
 
 const analysisRouter = Router();
 
 const repository = new PrismaAIAnalysisRepository();
-
-const controller = new AIAnalysisController(repository);
+const getAnalysisHistoryUseCase = new GetAnalysisHistoryUseCase(repository);
+const controller = new AIAnalysisController(getAnalysisHistoryUseCase);
 
 /**
  * @openapi
@@ -21,8 +22,6 @@ const controller = new AIAnalysisController(repository);
  *       200:
  *         description: Lista de análises
  */
-analysisRouter.get("/analysis/history", (req, res) =>
-  controller.getHistory(req, res),
-);
+analysisRouter.get("/history", (req, res) => controller.getHistory(req, res));
 
 export { analysisRouter };

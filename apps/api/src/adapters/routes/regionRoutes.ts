@@ -42,8 +42,6 @@ const regionController = new RegionController(askQuestionRegionUseCase);
  *       200:
  *         description: Análise gerada pela IA
  */
-region.post("/regions/analysis", (req, res) =>
-  regionController.analyze(req, res),
-);
+region.post("/analysis", (req, res) => regionController.analyze(req, res));
 
 export { region };

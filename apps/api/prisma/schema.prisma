@@ -8,11 +8,18 @@ datasource db {
 }
 
 model Region {
-  id         String            @id @default(uuid())
-  name       String
-  state      String
-  country    String
-  indicators RegionIndicator[]
+  id        String @id @default(uuid())
+
+  name      String
+  state     String
+  country   String
+
+  latitude  Float?
+  longitude Float?
+
+  indicators  RegionIndicator[]
+  formations  Formation[]
+  employments Employment[]
 }
 
 model Formation {
@@ -21,32 +28,46 @@ model Formation {
   description String
   type        String
   provider    String
+
   regionId    String
+  region      Region @relation(fields: [regionId], references: [id])
 }
 
 model RegionIndicator {
   id                  String @id @default(uuid())
+
   indicator           String
+
   value               Float
   peopleConcentration Int
   networkCoverage     String
   source              String
+
   regionId            String
   region              Region @relation(fields: [regionId], references: [id])
 }
 
 model AIAnalysis {
   id        String   @id @default(uuid())
+
   question  String
   answer    String   @db.Text
+
+  sources   String?
+
   createdAt DateTime @default(now())
 }
 
 model Employment {
   id                   String @id @default(uuid())
-  regionId             String
+
   unemploymentRate     Float
   formalEmploymentRate Float
   sector               String
   demographicGroup     String
+
+  regionId             String
+  region               Region @relation(fields: [regionId], references: [id])
 }
+
+
