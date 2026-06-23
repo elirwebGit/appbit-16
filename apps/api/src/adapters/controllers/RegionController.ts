@@ -20,13 +20,28 @@ export class RegionController {
   }
 
   async analyze(req: Request, res: Response): Promise<Response> {
-    const { question } = req.body;
+    try {
+      const { question } = req.body;
 
-    const answer = await this.askQuestionRegionUseCase.execute(question);
+      if (!question || typeof question !== "string") {
+        return res.status(400).json({
+          success: false,
+          answer: "O campo 'question' é obrigatório.",
+        });
+      }
 
-    return res.status(200).json({
-      success: true,
-      answer,
-    });
+      const answer = await this.askQuestionRegionUseCase.execute(question);
+
+      return res.status(200).json({
+        success: true,
+        answer,
+      });
+    } catch (error: any) {
+      console.error("Erro na análise de IA:", error);
+      return res.status(500).json({
+        success: false,
+        answer: "Erro interno ao processar análise. Verifique a configuração da API de IA.",
+      });
+    }
   }
 }

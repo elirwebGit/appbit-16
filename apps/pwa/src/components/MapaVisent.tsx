@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-leaflet'
 import L from 'leaflet'
 
 // Importação do CSS essencial do Leaflet
@@ -18,6 +18,19 @@ const IconeCustomizado = L.icon({
 
 import type { RegiaoMapa } from '../types/visent'
 import { getRegionsForMap } from '../services/api'
+
+function MapResizer() {
+  const map = useMap();
+  useEffect(() => {
+    if (!map) return;
+    const observer = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+    observer.observe(map.getContainer());
+    return () => observer.disconnect();
+  }, [map]);
+  return null;
+}
 
 export default function MapaVisent() {
   const [dadosRegioes, setDadosRegioes] = useState<RegiaoMapa[]>([])
@@ -109,6 +122,7 @@ export default function MapaVisent() {
       zoom={7} // Zoom reduzido para capturar o eixo SP-RJ na mesma visão
       style={{ height: '100%', width: '100%' }}
     >
+      <MapResizer />
       {/* Camada do mapa com estilo escuro (CartoDB Dark Matter) */}
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'

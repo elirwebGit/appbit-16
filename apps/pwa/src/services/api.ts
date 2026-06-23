@@ -35,7 +35,9 @@ export async function analyzeQuestion(question: string) {
   });
 
   return res.json();
-}export async function getRegionsForMap() {
+}
+
+export async function getRegionsForMap() {
   const res = await fetch(`${BASE_URL}/regions`);
   return res.json();
 }

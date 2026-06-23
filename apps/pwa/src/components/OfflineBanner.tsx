@@ -8,12 +8,10 @@ export default function OfflineBanner() {
 
   return (
     <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
+      width: '100%',
       zIndex: 9999,
       backgroundColor: '#f59e0b',
+      flexShrink: 0,
       color: '#0f172a',
       padding: '8px 16px',
       display: 'flex',
