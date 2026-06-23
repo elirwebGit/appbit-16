@@ -17,6 +17,7 @@ import type { Mensagem } from "./types/visent";
 import OfflineBanner from "./components/OfflineBanner";
 import ReloadPrompt from "./components/ReloadPrompt";
 import { analyzeQuestion } from "./services/api";
+import MarkdownMessage from "./components/MarkdownMessage";
 
 export default function App() {
   const [mensagens, setMensagens] = useState<Mensagem[]>([
@@ -215,7 +216,11 @@ export default function App() {
               lineHeight: 1.5,
             }}
           >
-            {msg.texto}
+            {msg.autor === "ia" ? (
+              <MarkdownMessage texto={msg.texto} />
+            ) : (
+              msg.texto
+            )}
           </div>
         ))}
         <div ref={chatEndRef} />
