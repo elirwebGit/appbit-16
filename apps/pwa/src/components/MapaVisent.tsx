@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet'
 import L from 'leaflet'
 
@@ -17,13 +17,91 @@ const IconeCustomizado = L.icon({
 })
 
 import type { RegiaoMapa } from '../types/visent'
-import dadosMapa from '../../../../data/mock/mapa.json'
-
-const dadosRegioes: RegiaoMapa[] = dadosMapa.regioes as RegiaoMapa[]
+import { getRegionsForMap } from '../services/api'
 
 export default function MapaVisent() {
+  const [dadosRegioes, setDadosRegioes] = useState<RegiaoMapa[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
   // Centro estratégico entre SP e RJ para os dois aparecerem na tela ao mesmo tempo
   const posicaoCentro: [number, number] = [-23.30, -45.30]
+
+  useEffect(() => {
+    let active = true
+    getRegionsForMap()
+      .then((data) => {
+        if (active) {
+          setDadosRegioes(data)
+          setLoading(false)
+        }
+      })
+      .catch((err) => {
+        if (active) {
+          console.error("Erro ao carregar dados do mapa:", err)
+          setError("Não foi possível carregar as informações do mapa.")
+          setLoading(false)
+        }
+      })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  if (loading) {
+    return (
+      <div style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#0f172a',
+        color: '#38bdf8',
+        fontFamily: 'sans-serif'
+      }}>
+        <div style={{
+          width: '40px',
+          height: '40px',
+          border: '4px solid #1e293b',
+          borderTop: '4px solid #38bdf8',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite',
+          marginBottom: '12px'
+        }} />
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+        <span>Carregando dados das regiões...</span>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#0f172a',
+        color: '#ef4444',
+        fontFamily: 'sans-serif',
+        padding: '20px',
+        textAlign: 'center'
+      }}>
+        <div>
+          <strong style={{ fontSize: '16px' }}>Erro ao Carregar Mapa</strong>
+          <p style={{ margin: '8px 0 0 0', color: '#94a3b8', fontSize: '14px' }}>{error}</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <MapContainer 

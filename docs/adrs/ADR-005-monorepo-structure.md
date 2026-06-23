@@ -24,7 +24,7 @@ Utilizar **monorepo** com diretórios separados: `/frontend`, `/backend`, `/docs
 ```
 appbit-b2g-equipe16/
 ├── frontend/     # React + Vite + TypeScript
-├── backend/      # Fastify + Hexagonal
+├── backend/      # Express + Hexagonal
 ├── data/         # Datasets e scripts de seed
 └── docs/         # Documentação + ADRs
 ```

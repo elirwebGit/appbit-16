@@ -4,6 +4,7 @@ import { RegionController } from "../controllers/RegionController";
 
 import { PrismaRegionRepository } from "@infrastructure/repositories/PrismaRegionRepository";
 import { AskQuestionRegionUseCase } from "@application/useCases/AskQuestionRegionUseCase";
+import { GetMapRegionsUseCase } from "@application/useCases/GetMapRegionsUseCase";
 import { GeminiProvider } from "@infrastructure/ai/GeminiProvider";
 import { PrismaAIAnalysisRepository } from "@infrastructure/repositories/PrismaAIAnalysisRepository";
 
@@ -19,7 +20,53 @@ const askQuestionRegionUseCase = new AskQuestionRegionUseCase(
   analysisRepository,
 );
 
-const regionController = new RegionController(askQuestionRegionUseCase);
+const getMapRegionsUseCase = new GetMapRegionsUseCase(regionRepository);
+
+const regionController = new RegionController(
+  askQuestionRegionUseCase,
+  getMapRegionsUseCase,
+);
+
+/**
+ * @openapi
+ * /regions:
+ *   get:
+ *     summary: Retorna a lista de todas as regiões com coordenadas e indicadores formatados para o mapa
+ *     tags:
+ *       - Regions
+ *     responses:
+ *       200:
+ *         description: Lista de regiões formatada para o Leaflet
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   regiao:
+ *                     type: string
+ *                   nome_exibicao:
+ *                     type: string
+ *                   lat:
+ *                     type: number
+ *                   lng:
+ *                     type: number
+ *                   concentracao_pessoas:
+ *                     type: number
+ *                   cobertura_rede:
+ *                     type: string
+ *                   qualidade_sinal:
+ *                     type: number
+ *                   indicadores:
+ *                     type: object
+ *                     properties:
+ *                       empregabilidade:
+ *                         type: number
+ *                       saude_mental:
+ *                         type: number
+ */
+region.get("/", (req, res) => regionController.getAll(req, res));
 
 /**
  * @openapi
