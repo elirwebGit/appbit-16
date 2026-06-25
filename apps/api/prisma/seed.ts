@@ -182,6 +182,42 @@ async function main() {
     });
   }
 
+  // Seed Angola Regions
+  const angolaRegions = [
+    {
+      regiao: "Luanda-Centro",
+      estado: "Luanda",
+      lat: -8.8390,
+      lng: 13.2894
+    },
+    {
+      regiao: "Benguela-Centro",
+      estado: "Benguela",
+      lat: -12.5760,
+      lng: 13.4050
+    },
+    {
+      regiao: "Huambo-Centro",
+      estado: "Huambo",
+      lat: -12.7761,
+      lng: 15.7390
+    }
+  ];
+
+  for (const item of angolaRegions) {
+    const region = await prisma.region.create({
+      data: {
+        name: item.regiao,
+        state: item.estado,
+        country: "Angola",
+        latitude: item.lat,
+        longitude: item.lng,
+      },
+    });
+
+    createdRegions[item.regiao] = region;
+  }
+
   // Seed formations
   console.log("Seeding formations...");
   await prisma.formation.createMany({
@@ -206,6 +242,71 @@ async function main() {
         type: "Negócios",
         provider: "Sebrae",
         regionId: createdRegions["BA-Suburbio"].id,
+      },
+      // Angola Formations
+      {
+        title: "Programação Web",
+        description: "Formação em Programação Web",
+        type: "Tecnologia",
+        provider: "Local",
+        regionId: createdRegions["Luanda-Centro"].id,
+      },
+      {
+        title: "Inclusão Digital",
+        description: "Formação em Inclusão Digital",
+        type: "Tecnologia",
+        provider: "Local",
+        regionId: createdRegions["Luanda-Centro"].id,
+      },
+      {
+        title: "Alfabetização Digital",
+        description: "Formação em Alfabetização Digital",
+        type: "Tecnologia",
+        provider: "Local",
+        regionId: createdRegions["Benguela-Centro"].id,
+      },
+      {
+        title: "Marketing Digital",
+        description: "Formação em Marketing Digital",
+        type: "Tecnologia",
+        provider: "Local",
+        regionId: createdRegions["Benguela-Centro"].id,
+      },
+      {
+        title: "Introdução à Tecnologia",
+        description: "Formação em Introdução à Tecnologia",
+        type: "Tecnologia",
+        provider: "Local",
+        regionId: createdRegions["Huambo-Centro"].id,
+      },
+      {
+        title: "Empreendedorismo Digital",
+        description: "Formação em Empreendedorismo Digital",
+        type: "Negócios",
+        provider: "Local",
+        regionId: createdRegions["Huambo-Centro"].id,
+      },
+      // Angola Mental Health Services
+      {
+        title: "Apoio Psicológico",
+        description: "Atendimento psicológico e orientação emocional",
+        type: "Saúde Mental",
+        provider: "Local",
+        regionId: createdRegions["Luanda-Centro"].id,
+      },
+      {
+        title: "Bem-estar Comunitário",
+        description: "Programa de prevenção da depressão e ansiedade",
+        type: "Saúde Mental",
+        provider: "Local",
+        regionId: createdRegions["Benguela-Centro"].id,
+      },
+      {
+        title: "Saúde Mental Juvenil",
+        description: "Acompanhamento psicológico para jovens e famílias",
+        type: "Saúde Mental",
+        provider: "Local",
+        regionId: createdRegions["Huambo-Centro"].id,
       }
     ],
   });
