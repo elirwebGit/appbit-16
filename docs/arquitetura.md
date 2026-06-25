@@ -15,7 +15,7 @@
 │            REST (POST /dados, GET /mapa, ...)   │
 ├─────────────────────────────────────────────────┤
 │                    BACKEND                      │
-│         Fastify (Node.js)                       │
+│         Express (Node.js)                       │
 │         Arquitetura Hexagonal                   │
 │         Deploy: --                │
 ├─────────────────────────────────────────────────┤
@@ -35,7 +35,7 @@
 
 ```
                     ┌─────────────────────┐
-                    │     HTTP (Fastify)   │  ← Adaptador de entrada
+                    │     HTTP (Express)   │  ← Adaptador de entrada
                     └──────────┬──────────┘
                                │
                     ┌──────────▼──────────┐

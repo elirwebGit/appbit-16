@@ -50,7 +50,7 @@ Ao responder a consultas feitas em linguagem natural, o sistema auxilia gestores
 A solução será desenvolvida como uma **Web App Responsiva (PWA)**:
 - **Acessibilidade Cross-device**: Funciona com a mesma eficiência no celular do gestor em campo ou no monitor desktop do analista de gabinete.
 - **Leveza e Desempenho**: Interface responsiva de rápida renderização de mapas interativos (via Leaflet.js) e gráficos intuitivos.
-- **Arquitetura Desacoplada**: Integração fluida entre Frontend (React + Vite) e Backend (Fastify) por meio de contratos de API rígidos e seguros.
+- **Arquitetura Desacoplada**: Integração fluida entre Frontend (React + Vite) e Backend (Express) por meio de contratos de API rígidos e seguros.
 
 ---
 
