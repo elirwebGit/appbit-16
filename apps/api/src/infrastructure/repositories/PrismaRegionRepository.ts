@@ -1,24 +1,48 @@
-import { IRegionRepository } from "../../domain/repositories/IRegionRepository";
-import { Region } from "../../domain/entities/Region";
-import { prisma } from "@infrastructure/prisma/client";
+import { prisma } from "../prisma/client";
 
-export class PrismaRegionRepository implements IRegionRepository {
-  async findAll(): Promise<Region[]> {
-    const regions = await prisma.region.findMany();
-
-    return regions.map(
-      (region: Region) =>
-        new Region(region.id, region.name, region.state, region.country),
-    );
+export class PrismaRegionRepository {
+  async findAll() {
+    return prisma.region.findMany();
   }
 
-  async findById(id: string): Promise<Region | null> {
-    const region = await prisma.region.findUnique({
-      where: { id },
+  async findById(id: string) {
+    return prisma.region.findUnique({
+      where: {
+        id,
+      },
     });
+  }
 
-    if (!region) return null;
+  async findIndicators(regionId?: string) {
+    return prisma.region.findMany({
+      where: regionId ? { id: regionId } : undefined,
+      include: {
+        indicators: true,
+        employments: true,
+        formations: true,
+      },
+    });
+  }
 
-    return new Region(region.id, region.name, region.state, region.country);
+  async findDashboardData() {
+    return prisma.region.findMany({
+      include: {
+        indicators: true,
+        employments: true,
+        formations: true,
+      },
+    });
+  }
+
+  async findByIdWithRelations(id: string) {
+    return prisma.region.findUnique({
+      where: { id },
+
+      include: {
+        indicators: true,
+        employments: true,
+        formations: true,
+      },
+    });
   }
 }

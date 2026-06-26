@@ -4,5 +4,12 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "p-retry": "^8.0.0"
+  },
+  "devDependencies": {
+    "jsonfile": "^6.2.1",
+    "jsonpointer": "^5.0.1"
+  }
 }

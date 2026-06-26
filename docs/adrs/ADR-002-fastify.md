@@ -1,7 +1,7 @@
 # ADR-002 — Fastify
 
 **Data**: 2026-06-12
-**Status**: ✅ Aceita
+**Status**: ❌ Substituída por [ADR-007-express.md](./ADR-007-express.md)
 **Autor**: Elir
 
 ## Contexto

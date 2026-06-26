@@ -7,7 +7,7 @@ export class PrismaFormationRepository implements IFormationRepository {
     const formations = await prisma.formation.findMany();
 
     return formations.map(
-      (f: Formation) =>
+      (f) =>
         new Formation(
           f.id,
           f.title,
@@ -25,7 +25,7 @@ export class PrismaFormationRepository implements IFormationRepository {
     });
 
     return formations.map(
-      (f: Formation) =>
+      (f) =>
         new Formation(
           f.id,
           f.title,

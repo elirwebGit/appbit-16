@@ -1,24 +1,42 @@
 import { Router } from "express";
+
 import { RegionController } from "../controllers/RegionController";
-import { GetRegionsUseCase } from "../../application/useCases/GetRegionsUseCase";
-import { InMemoryRegionRepository } from "../../infrastructure/repositories/InMemoryRegionRepository";
 
-const router = Router();
+import { PrismaRegionRepository } from "@infrastructure/repositories/PrismaRegionRepository";
+import { AskQuestionRegionUseCase } from "@application/useCases/AskQuestionRegionUseCase";
+import { GetMapRegionsUseCase } from "@application/useCases/GetMapRegionsUseCase";
+import { GeminiProvider } from "@infrastructure/ai/GeminiProvider";
+import { PrismaAIAnalysisRepository } from "@infrastructure/repositories/PrismaAIAnalysisRepository";
 
-const regionRepository = new InMemoryRegionRepository();
-const getRegionsUseCase = new GetRegionsUseCase(regionRepository);
-const regionController = new RegionController(getRegionsUseCase);
+const region = Router();
+
+const regionRepository = new PrismaRegionRepository();
+const geminiProvider = new GeminiProvider();
+const analysisRepository = new PrismaAIAnalysisRepository();
+
+const askQuestionRegionUseCase = new AskQuestionRegionUseCase(
+  geminiProvider,
+  regionRepository,
+  analysisRepository,
+);
+
+const getMapRegionsUseCase = new GetMapRegionsUseCase(regionRepository);
+
+const regionController = new RegionController(
+  askQuestionRegionUseCase,
+  getMapRegionsUseCase,
+);
 
 /**
  * @openapi
  * /regions:
  *   get:
- *     summary: Lista todas as regiões
+ *     summary: Retorna a lista de todas as regiões com coordenadas e indicadores formatados para o mapa
  *     tags:
  *       - Regions
  *     responses:
  *       200:
- *         description: Lista de regiões
+ *         description: Lista de regiões formatada para o Leaflet
  *         content:
  *           application/json:
  *             schema:
@@ -26,15 +44,51 @@ const regionController = new RegionController(getRegionsUseCase);
  *               items:
  *                 type: object
  *                 properties:
- *                   id:
+ *                   regiao:
  *                     type: string
- *                   name:
+ *                   nome_exibicao:
  *                     type: string
- *                   state:
+ *                   lat:
+ *                     type: number
+ *                   lng:
+ *                     type: number
+ *                   concentracao_pessoas:
+ *                     type: number
+ *                   cobertura_rede:
  *                     type: string
- *                   country:
- *                     type: string
+ *                   qualidade_sinal:
+ *                     type: number
+ *                   indicadores:
+ *                     type: object
+ *                     properties:
+ *                       empregabilidade:
+ *                         type: number
+ *                       saude_mental:
+ *                         type: number
  */
-router.get("/regions", (req, res) => regionController.getAll(req, res));
+region.get("/", (req, res) => regionController.getAll(req, res));
 
-export { router };
+/**
+ * @openapi
+ * /regions/analysis:
+ *   post:
+ *     summary: Analisa indicadores regionais utilizando IA
+ *     tags:
+ *       - Regions
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question:
+ *                 type: string
+ *                 example: Qual região deve receber prioridade de investimento?
+ *     responses:
+ *       200:
+ *         description: Análise gerada pela IA
+ */
+region.post("/analysis", (req, res) => regionController.analyze(req, res));
+
+export { region };
