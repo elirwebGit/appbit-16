@@ -6,8 +6,7 @@ export default function ReloadPrompt() {
     offlineReady: [offlineReady, setOfflineReady],
     updateServiceWorker,
   } = useRegisterSW({
-    onRegisteredSW(swScriptUrl, registration) {
-      console.log('Service Worker registrado:', swScriptUrl);
+    onRegisteredSW(_swScriptUrl, registration) {
       // Verifica atualizações a cada hora
       if (registration) {
         setInterval(() => registration.update(), 60 * 60 * 1000);

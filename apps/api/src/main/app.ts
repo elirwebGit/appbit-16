@@ -15,14 +15,20 @@ const app = express();
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: [
+// Origens permitidas — em produção, set CORS_ORIGIN no Railway com a URL do Vercel
+// Ex: CORS_ORIGIN=https://seu-app.vercel.app
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim())
+  : [
       "http://localhost:5173",
       "http://127.0.0.1:5173",
       "http://localhost:5174",
       "http://127.0.0.1:5174",
-    ],
+    ];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );

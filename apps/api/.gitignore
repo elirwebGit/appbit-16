@@ -1,5 +1,17 @@
-node_modules
-# Keep environment variables out of version control
-.env
+node_modules/
 
+# Ambiente — nunca comitar chaves reais!
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+tsconfig.tsbuildinfo
+
+# Prisma generated
 /src/generated/prisma
+
+# Logs
+*.log
+npm-debug.log*
