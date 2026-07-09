@@ -17,15 +17,13 @@
 
     "sourceMap": true,
 
-    "baseUrl": "./src",
-
     "paths": {
-      "@domain/*": ["domain/*"],
-      "@application/*": ["application/*"],
-      "@infrastructure/*": ["infrastructure/*"],
-      "@adapters/*": ["adapters/*"],
-      "@shared/*": ["shared/*"],
-      "@main/*": ["main/*"]
+      "@domain/*": ["./src/domain/*"],
+      "@application/*": ["./src/application/*"],
+      "@infrastructure/*": ["./src/infrastructure/*"],
+      "@adapters/*": ["./src/adapters/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@main/*": ["./src/main/*"]
     },
 
     "types": ["node"],
