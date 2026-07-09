@@ -37,7 +37,7 @@ export class RegionController {
         answer,
       });
     } catch (error: any) {
-      console.error("Erro na análise de IA:", error);
+      console.error("Erro na análise de IA:", error.message);
       return res.status(500).json({
         success: false,
         answer: "Erro interno ao processar análise. Verifique a configuração da API de IA.",
