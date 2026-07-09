@@ -1,25 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  MapPin,
-  ShieldAlert,
-  Briefcase,
-  GraduationCap,
   MessagesSquare,
   Bot,
-  Menu,
   X,
   ChevronUp,
   ChevronDown,
   Send,
 } from "lucide-react";
 import type { Mensagem } from "../types/visent";
-import { analyzeQuestion, getDashboard } from "../services/api";
+import { getDashboard } from "../services/api";
 import MarkdownMessage from "../components/MarkdownMessage";
 import OfflineBanner from "../components/OfflineBanner";
 import MapaVisent from "../components/MapaVisent";
 import ReloadPrompt from "../components/ReloadPrompt";
 import { Topbar } from "../components/Topbar";
-import { Link } from "react-router-dom";
 import { MenuAppBit } from "../components/MenuAppBit";
 
 export default function DashboardPage() {
@@ -127,7 +121,6 @@ export default function DashboardPage() {
 
     setMensagens((prev) => [...prev, novaMsgUsuario]);
 
-    const pergunta = textoInput;
     setTextoInput("");
 
     try {
