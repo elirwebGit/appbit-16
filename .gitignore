@@ -32,3 +32,9 @@ Thumbs.db
 
 # Docker overrides
 docker-compose.override.yml
+
+
+#guias de implantação
+/telas-codigo
+/Plano-codex
+/img-referencia

@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, MapPin, ShieldAlert } from "lucide-react";
+import { Briefcase, GraduationCap, MapPin, ShieldAlert, LayoutDashboard } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function MenuAppBit() {
@@ -12,6 +12,16 @@ export function MenuAppBit() {
       }}
     >
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        <li>
+          <Link
+            to="/painel"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <LayoutDashboard size={20} /> Painel
+            </div>
+          </Link>
+        </li>
         <li>
           <Link
             to="/regions"
@@ -59,6 +69,16 @@ export function MenuAppBit() {
           >
             <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
               <ShieldAlert size={20} /> Histórico de Análises
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/consulta-ia"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <ShieldAlert size={20} /> Consulta IA
             </div>
           </Link>
         </li>
