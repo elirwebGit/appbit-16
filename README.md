@@ -41,7 +41,7 @@ appbit-16/
 │   │   │   └── infrastructure/ # Prisma, repos, IA
 │   │   ├── data/mock/    # JSONs para desenvolvimento sem banco
 │   │   └── prisma/       # Schema do banco de dados
-│   └── frontend/         # (em construção — React + Vite)
+│   └── pwa/              # Frontend — React + Vite + Leaflet
 ├── docs/
 │   ├── arquitetura.md    # Visão técnica completa
 │   ├── contratos-api.md  # Formato dos endpoints REST
@@ -105,6 +105,18 @@ npm run dev
 
 O servidor estará disponível em `http://localhost:3000`
 A documentação Swagger estará em `http://localhost:3000/docs`
+
+### 7. Inicie o front-end (PWA)
+
+Abra uma nova janela no terminal e rode:
+
+```bash
+cd apps/pwa
+npm install
+npm run dev
+```
+
+O PWA estará disponível na porta informada pelo Vite (geralmente `http://localhost:5173`). O front-end já está configurado para apontar para a API no `localhost:3000`.
 
 ---
 
