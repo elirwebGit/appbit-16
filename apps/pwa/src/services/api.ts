@@ -41,32 +41,3 @@ export async function getRegionsForMap() {
   const res = await fetch(`${BASE_URL}/regions`);
   return res.json();
 }
-
-export async function getHistory() {
-  const res = await fetch(`${BASE_URL}/analysis/history`);
-  return res.json();
-}
-
-export async function formationQuestion(question: string) {
-  const res = await fetch(`${BASE_URL}/formation`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ question }),
-  });
-
-  return res.json();
-}
-
-export async function employmentQuestion(question: string) {
-  const res = await fetch(`${BASE_URL}/employment`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ question }),
-  });
-
-  return res.json();
-}

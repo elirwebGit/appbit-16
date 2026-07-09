@@ -4,6 +4,7 @@ export class GeminiProvider {
   private ai: GoogleGenAI;
 
   constructor() {
+    console.log("GEMINI_API_KEY:" + process.env.GEMINI_API_KEY);
     this.ai = new GoogleGenAI({
       apiKey: process.env.GEMINI_API_KEY!,
     });

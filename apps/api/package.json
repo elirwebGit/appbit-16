@@ -4,8 +4,8 @@
   "main": "dist/main/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/main/server.ts",
-    "build": "prisma generate && tsc",
-    "start": "node -r tsconfig-paths/register dist/main/server.js"
+    "build": "tsc",
+    "start": "node dist/main/server.js"
   },
   "dependencies": {
     "@google/genai": "^2.9.0",
@@ -15,7 +15,6 @@
     "express": "^5.2.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "tsconfig-paths": "^4.2.0",
     "tsyringe": "^4.10.0"
   },
   "devDependencies": {
@@ -26,6 +25,7 @@
     "@types/swagger-ui-express": "^4.1.8",
     "prisma": "^6.19.3",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"
   }
 }

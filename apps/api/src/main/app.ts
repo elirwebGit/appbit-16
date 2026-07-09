@@ -9,8 +9,6 @@ import { crossRegionRouter } from "@adapters/routes/crossRegionRoute";
 import { dashboardRouter } from "@adapters/routes/dashboardRouter";
 import { regionIndicatorsRouter } from "@adapters/routes/regionIndicatorsRouter";
 import cors from "cors";
-import { formationRoute } from "@adapters/routes/formationRoute";
-import { employmentRoute } from "@adapters/routes/employmentRoute";
 const app = express();
 
 app.use(express.json());
@@ -42,9 +40,8 @@ app.use("/api/analysis", analysisRouter);
 app.use("/api/cross-region", crossRegionRouter);
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api/region", regionIndicatorsRouter);
-app.use("/api/formation", formationRoute);
-app.use("/api/employment", employmentRoute);
-app.use("/api/ai", aiRouter);
+
+app.use("/api/ai", aiRouter); // vou remover
 
 // Health
 app.get("/health", (_req, res) => {
