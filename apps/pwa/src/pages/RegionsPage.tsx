@@ -120,7 +120,7 @@ export default function RegionsPage() {
     };
 
     setMensagens((prev) => [...prev, novaMsgUsuario]);
-    const pergunta = textoInput;
+
     setTextoInput("");
 
     try {
