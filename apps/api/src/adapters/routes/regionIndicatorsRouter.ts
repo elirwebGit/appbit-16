@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@infrastructure/prisma/client";
 
 const regionIndicatorsRouter = Router();
 const prisma = new PrismaClient();
