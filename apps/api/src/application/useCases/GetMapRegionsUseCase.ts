@@ -24,6 +24,7 @@ export interface RegiaoMapa {
   indicadores: {
     empregabilidade: number;
     saude_mental: number;
+    formacoes: number;
   };
 }
 
@@ -45,6 +46,9 @@ export class GetMapRegionsUseCase {
       const qualidadeSinalInd = indicators.find(
         (i) => i.indicator === "qualidade_sinal"
       );
+      const formacoesInd = indicators.find(
+        (i) => i.indicator === "formacoes"
+      );
 
       const mainInd = indicators[0];
 
@@ -61,6 +65,7 @@ export class GetMapRegionsUseCase {
         indicadores: {
           empregabilidade: empregabilidadeInd ? empregabilidadeInd.value : 0,
           saude_mental: saudeMentalInd ? saudeMentalInd.value : 0,
+          formacoes: formacoesInd ? formacoesInd.value : (region.formations?.length ? region.formations.length * 0.1 : 0),
         },
       };
     });

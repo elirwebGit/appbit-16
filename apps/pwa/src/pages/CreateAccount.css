@@ -1,0 +1,316 @@
+.create-account-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 28px clamp(18px, 3.5vw, 48px) 0;
+  color: var(--app-color-text);
+  background: #80807e;
+  font-family: var(--app-font-family);
+}
+
+.create-account-bg,
+.create-account-bottom-fade {
+  position: absolute;
+  pointer-events: none;
+}
+
+.create-account-bg-top {
+  top: -210px;
+  right: -230px;
+  width: min(74vw, 1060px);
+  height: 580px;
+  border-radius: 0 0 0 100%;
+  background: rgba(35, 35, 35, 0.36);
+}
+
+.create-account-bg-bottom {
+  bottom: -110px;
+  left: -110px;
+  width: 112vw;
+  height: min(48vw, 700px);
+  border-radius: 55% 45% 0 0 / 90% 74% 0 0;
+  background: #202020;
+}
+
+.create-account-bottom-fade {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 92px;
+  background: linear-gradient(180deg, rgba(86, 86, 86, 0) 0%, rgba(186, 172, 90, 0.28) 100%);
+}
+
+.create-account-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(36px, 6vw, 74px);
+}
+
+.create-account-logo {
+  width: clamp(118px, 12vw, 154px);
+  height: auto;
+}
+
+.create-account-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  width: 164px;
+  min-height: 37px;
+  border: 0;
+  border-radius: var(--app-radius-lg);
+  color: var(--app-color-text);
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: var(--app-shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+  font-weight: var(--app-font-semibold);
+  line-height: 1;
+  backdrop-filter: blur(2px);
+  transition: background var(--app-transition-fast), transform var(--app-transition-fast);
+}
+
+.create-account-back:hover {
+  background: rgba(255, 255, 255, 0.58);
+  transform: translateY(-1px);
+}
+
+.create-account-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 620px);
+  margin: clamp(28px, 5vw, 48px) auto 0;
+  text-align: center;
+}
+
+.create-account-shell h1 {
+  margin-bottom: 36px;
+  color: #ffffff;
+  font-size: clamp(38px, 4vw, 48px);
+  font-weight: var(--app-font-thin);
+  line-height: 1.2;
+  text-shadow:
+    0 0 0 #ffffff,
+    0 2px 3px rgba(255, 255, 255, 0.5);
+}
+
+.create-account-card {
+  overflow: hidden;
+  border-radius: var(--app-radius-xl) var(--app-radius-xl) 0 0;
+  background: var(--app-color-surface);
+  box-shadow: var(--app-shadow-lg);
+}
+
+.create-account-intro {
+  padding: 30px 30px 32px;
+  color: rgba(255, 255, 255, 0.68);
+  background: #343434;
+  font-size: 20px;
+  font-weight: var(--app-font-semibold);
+  line-height: 1.22;
+}
+
+.create-account-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 52px clamp(26px, 6vw, 62px) 0;
+}
+
+.create-account-field {
+  display: flex;
+  width: 100%;
+  max-width: 494px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.create-account-field span {
+  padding-left: 12px;
+  color: var(--app-color-text);
+  font-size: 20px;
+  font-weight: var(--app-font-semibold);
+  line-height: 1.22;
+}
+
+.create-account-field input,
+.create-account-field select {
+  width: 100%;
+  height: 47px;
+  margin-top: 0;
+  border: 0.14px solid #383838;
+  border-radius: var(--app-radius-input);
+  color: var(--app-color-text);
+  background-color: var(--app-color-surface-warm);
+  box-shadow: var(--app-shadow-sm);
+  font-size: 20px;
+  font-weight: var(--app-font-regular);
+  line-height: 1.2;
+}
+
+.create-account-field input {
+  padding: 0 14px;
+}
+
+.create-account-field select {
+  appearance: auto;
+  padding: 0 12px;
+}
+
+.create-account-field input::placeholder {
+  color: rgba(35, 35, 35, 0.64);
+  opacity: 1;
+}
+
+.create-account-submit {
+  width: min(331px, 100%);
+  min-height: 65px;
+  margin-top: 40px;
+  border: 0;
+  border-radius: var(--app-radius-xl);
+  color: #ededed;
+  background: #343434;
+  box-shadow: var(--app-shadow-lg);
+  font-size: 24px;
+  font-weight: var(--app-font-semibold);
+  transition: background var(--app-transition-fast), transform var(--app-transition-fast);
+}
+
+.create-account-submit:hover {
+  background: var(--app-color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.create-account-divider {
+  display: flex;
+  align-items: center;
+  width: min(333px, 100%);
+  margin: 46px 0 52px;
+  color: var(--app-color-text);
+  font-size: 20px;
+  font-weight: var(--app-font-semibold);
+}
+
+.create-account-divider::before,
+.create-account-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--app-color-text);
+}
+
+.create-account-divider span {
+  padding: 0 8px;
+}
+
+.create-account-google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: min(331px, 100%);
+  min-height: 64px;
+  border: 2px solid #827f7f;
+  border-radius: var(--app-radius-xl);
+  color: var(--app-color-text);
+  background: var(--app-color-surface);
+  box-shadow: var(--app-shadow-lg);
+  font-size: 20px;
+  font-weight: var(--app-font-semibold);
+  transition: background var(--app-transition-fast), transform var(--app-transition-fast);
+}
+
+.create-account-google:hover {
+  background: #f8f8f8;
+  transform: translateY(-1px);
+}
+
+.create-account-login {
+  margin-top: 154px;
+  padding: 38px 20px 40px;
+  color: rgba(255, 255, 255, 0.68);
+  background: #343434;
+  font-size: 20px;
+  font-weight: var(--app-font-semibold);
+  line-height: 1.25;
+}
+
+.create-account-login button {
+  border: 0;
+  padding: 0;
+  color: #1df2f2;
+  background: transparent;
+  font: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .create-account-page {
+    padding: 22px 16px 0;
+  }
+
+  .create-account-header {
+    gap: 28px;
+  }
+
+  .create-account-back {
+    width: 142px;
+    gap: 12px;
+    font-size: 17px;
+  }
+
+  .create-account-shell {
+    margin-top: 34px;
+  }
+
+  .create-account-shell h1 {
+    margin-bottom: 24px;
+    font-size: 36px;
+  }
+
+  .create-account-intro {
+    padding: 24px 18px;
+    font-size: 16px;
+  }
+
+  .create-account-form {
+    padding: 34px 18px 0;
+  }
+
+  .create-account-field {
+    margin-bottom: 22px;
+  }
+
+  .create-account-field span,
+  .create-account-field input,
+  .create-account-field select,
+  .create-account-divider,
+  .create-account-google,
+  .create-account-login {
+    font-size: 16px;
+  }
+
+  .create-account-submit {
+    margin-top: 24px;
+    font-size: 20px;
+  }
+
+  .create-account-divider {
+    margin: 34px 0 38px;
+  }
+
+  .create-account-google {
+    gap: 14px;
+  }
+
+  .create-account-login {
+    margin-top: 92px;
+    padding: 28px 18px;
+  }
+}
