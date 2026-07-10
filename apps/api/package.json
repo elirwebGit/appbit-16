@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/main/server.ts",
     "build": "prisma generate && tsc && tsc-alias",
-    "start": "node -r tsconfig-paths/register dist/main/server.js"
+    "start": "npm run prisma:migration && node -r tsconfig-paths/register dist/main/server.js"
   },
   "dependencies": {
     "@google/genai": "^2.9.0",
