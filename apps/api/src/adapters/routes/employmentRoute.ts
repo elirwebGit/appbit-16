@@ -42,8 +42,6 @@ const employmentController = new EmploymentController(
  *       200:
  *         description: Resposta gerada pela IA
  */
-employmentRoute.post("/query", (req, res) =>
-  employmentController.ask(req, res),
-);
+employmentRoute.post("/", (req, res) => employmentController.ask(req, res));
 
 export { employmentRoute };
