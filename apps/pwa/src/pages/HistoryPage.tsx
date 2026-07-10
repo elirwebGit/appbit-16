@@ -1,19 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  MapPin,
-  ShieldAlert,
-  Briefcase,
-  GraduationCap,
   MessagesSquare,
   Bot,
-  Menu,
   X,
   ChevronUp,
   ChevronDown,
   Send,
 } from "lucide-react";
 import type { Mensagem } from "../types/visent";
-import { analyzeQuestion, getHistory } from "../services/api";
+import { getHistory } from "../services/api";
 import MarkdownMessage from "../components/MarkdownMessage";
 import OfflineBanner from "../components/OfflineBanner";
 import MapaVisent from "../components/MapaVisent";
@@ -126,7 +121,6 @@ export default function HistoryPage() {
 
     setMensagens((prev) => [...prev, novaMsgUsuario]);
 
-    const pergunta = textoInput;
     setTextoInput("");
 
     try {

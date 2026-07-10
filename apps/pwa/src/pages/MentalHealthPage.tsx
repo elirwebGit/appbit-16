@@ -1,12 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  MapPin,
-  ShieldAlert,
-  Briefcase,
-  GraduationCap,
   MessagesSquare,
   Bot,
-  Menu,
   X,
   ChevronUp,
   ChevronDown,
