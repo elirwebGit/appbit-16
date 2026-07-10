@@ -12,18 +12,8 @@ export function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        background: "#ef4444",
-        color: "#fff",
-        border: "none",
-        padding: "8px 14px",
-        borderRadius: "6px",
-        cursor: "pointer",
-        fontWeight: "bold",
-      }}
+      className="logout-btn"
+      aria-label="Sair"
     >
       <LogOut size={18} />
       Sair
