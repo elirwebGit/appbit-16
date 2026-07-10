@@ -13,8 +13,7 @@ import MarkdownMessage from "../components/MarkdownMessage";
 import OfflineBanner from "../components/OfflineBanner";
 import MapaVisent from "../components/MapaVisent";
 import ReloadPrompt from "../components/ReloadPrompt";
-import { Topbar } from "../components/Topbar";
-import { MenuAppBit } from "../components/MenuAppBit";
+import { Navbar } from "../components/Navbar";
 
 export default function FormationsPage() {
   <button
@@ -417,7 +416,7 @@ export default function FormationsPage() {
             )}
           </div>
 
-          <MenuAppBit />
+          
         </aside>
 
         {/* ===== Main ===== */}
@@ -429,11 +428,7 @@ export default function FormationsPage() {
             minWidth: 0,
           }}
         >
-          <Topbar
-            title="Painel Vísent CDRView"
-            isMobile={isMobile}
-            onMenuClick={() => setIsLeftSidebarOpen(!isLeftSidebarOpen)}
-          />{" "}
+          <Navbar />{" "}
           {/* Content area */}
           <div
             style={{

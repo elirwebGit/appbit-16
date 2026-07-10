@@ -45,4 +45,21 @@ export class PrismaRegionRepository {
       },
     });
   }
+
+  async create(data: any) {
+    return prisma.region.create({
+      data,
+    });
+  }
+
+  async delete(id: string) {
+    // Delete relations first
+    await prisma.regionIndicator.deleteMany({ where: { regionId: id } });
+    await prisma.formation.deleteMany({ where: { regionId: id } });
+    await prisma.employment.deleteMany({ where: { regionId: id } });
+    
+    return prisma.region.delete({
+      where: { id },
+    });
+  }
 }

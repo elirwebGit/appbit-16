@@ -1,0 +1,93 @@
+.export-popover-container {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  width: 320px; /* Fixed width to prevent shrinking */
+  overflow: hidden;
+}
+
+.export-popover-header {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.export-popover-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.export-back-btn, .export-action-btn {
+  background: #e2e8f0;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #475569;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.export-back-btn:hover, .export-action-btn:hover {
+  background: #cbd5e1;
+}
+
+.export-input-name {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  min-width: 0; /* Important for flex items to shrink below their content size */
+  background: #ffffff;
+}
+
+.export-select-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.export-select-format {
+  padding: 8px 24px 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  cursor: pointer;
+  appearance: none;
+  width: 75px; /* Ensures text doesn't overflow or resize wildly */
+}
+
+/* Custom dropdown arrow to match the design */
+.export-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #475569;
+  pointer-events: none;
+}

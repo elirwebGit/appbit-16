@@ -5,6 +5,8 @@ import { RegionController } from "../controllers/RegionController";
 import { PrismaRegionRepository } from "@infrastructure/repositories/PrismaRegionRepository";
 import { AskQuestionRegionUseCase } from "@application/useCases/AskQuestionRegionUseCase";
 import { GetMapRegionsUseCase } from "@application/useCases/GetMapRegionsUseCase";
+import { CreateRegionUseCase } from "@application/useCases/CreateRegionUseCase";
+import { DeleteRegionUseCase } from "@application/useCases/DeleteRegionUseCase";
 import { GeminiProvider } from "@infrastructure/ai/GeminiProvider";
 import { PrismaAIAnalysisRepository } from "@infrastructure/repositories/PrismaAIAnalysisRepository";
 
@@ -21,10 +23,14 @@ const askQuestionRegionUseCase = new AskQuestionRegionUseCase(
 );
 
 const getMapRegionsUseCase = new GetMapRegionsUseCase(regionRepository);
+const createRegionUseCase = new CreateRegionUseCase(regionRepository);
+const deleteRegionUseCase = new DeleteRegionUseCase(regionRepository);
 
 const regionController = new RegionController(
   askQuestionRegionUseCase,
   getMapRegionsUseCase,
+  createRegionUseCase,
+  deleteRegionUseCase
 );
 
 /**
@@ -90,5 +96,37 @@ region.get("/", (req, res) => regionController.getAll(req, res));
  *         description: Análise gerada pela IA
  */
 region.post("/analysis", (req, res) => regionController.analyze(req, res));
+
+/**
+ * @openapi
+ * /regions:
+ *   post:
+ *     summary: Cria uma nova região
+ *     tags:
+ *       - Regions
+ *     responses:
+ *       201:
+ *         description: Região criada com sucesso
+ */
+region.post("/", (req, res) => regionController.create(req, res));
+
+/**
+ * @openapi
+ * /regions/{id}:
+ *   delete:
+ *     summary: Remove uma região
+ *     tags:
+ *       - Regions
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Região removida com sucesso
+ */
+region.delete("/:id", (req, res) => regionController.delete(req, res));
 
 export { region };

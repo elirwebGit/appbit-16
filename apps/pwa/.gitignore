@@ -33,3 +33,9 @@ dist-ssr/
 
 # TypeScript
 tsconfig.tsbuildinfo
+
+
+#guias de implantação
+/telas-codigo
+/Plano-codex
+/img-referencia
