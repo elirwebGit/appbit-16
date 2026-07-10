@@ -17,15 +17,6 @@ import { Topbar } from "../components/Topbar";
 import { MenuAppBit } from "../components/MenuAppBit";
 
 export default function DashboardPage() {
-  <button
-    onClick={() => {
-      localStorage.removeItem("isAuthenticated");
-
-      window.location.href = "/login";
-    }}
-  >
-    Sair
-  </button>;
   const [mensagens, setMensagens] = useState<Mensagem[]>([
     {
       id: 1,

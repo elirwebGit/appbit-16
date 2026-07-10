@@ -45,6 +45,6 @@ const formationController = new FormationController(
  *       200:
  *         description: Resposta gerada pela IA
  */
-formationRoute.post("/query", (req, res) => formationController.ask(req, res));
+formationRoute.post("/", (req, res) => formationController.ask(req, res));
 
 export { formationRoute };

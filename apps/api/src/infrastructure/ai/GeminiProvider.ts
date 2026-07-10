@@ -10,6 +10,7 @@ export class GeminiProvider {
   }
 
   async generateAnalysis(prompt: string): Promise<string> {
+    console.log(process.env.GEMINI_API_KEY);
     const response = await this.ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
