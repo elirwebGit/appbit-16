@@ -1,8 +1,9 @@
-import * as dotenv from "dotenv";
 import { defineConfig } from "@prisma/config";
+import dotenv from "dotenv";
 
-// Injeta as variáveis do Railway no processo do Node
-dotenv.config();
+if (!process.env.RAILWAY_ENVIRONMENT) {
+  dotenv.config();
+}
 
 export default defineConfig({
   schema: "./prisma/schema.prisma",
