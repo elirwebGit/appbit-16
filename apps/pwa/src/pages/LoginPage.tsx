@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { login, setSession } from "../services/api";
 import "./Login.css";
 
 export function LoginPage() {
@@ -10,19 +11,21 @@ export function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-
-    // Login fake
-    if (email === "admin@appbit.com" && password === "123456") {
-      localStorage.setItem("isAuthenticated", "true");
+    setLoading(true);
+    try {
+      const session = await login(email, password);
+      setSession(session);
       navigate("/dashboard");
-      return;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Usuário ou senha inválidos.");
+    } finally {
+      setLoading(false);
     }
-
-    setError("Usuário ou senha inválidos.");
   }
 
   return (
@@ -81,8 +84,8 @@ export function LoginPage() {
 
           {error && <p className="error-message">{error}</p>}
 
-          <button type="submit" className="submit-btn">
-            Entrar
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? "Entrando..." : "Entrar"}
           </button>
 
           <div className="divider">

@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
+import { setSession } from "../services/api";
 
 export function LogoutButton() {
   const navigate = useNavigate();
 
   function handleLogout() {
-    localStorage.removeItem("isAuthenticated");
+    setSession(null);
     navigate("/login");
   }
 

@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { register, setSession } from "../services/api";
 import "./CreateAccount.css";
 
 const countries = ["Brasil", "Argentina", "Chile", "Colombia", "Mexico", "Portugal"];
@@ -7,8 +9,32 @@ const countries = ["Brasil", "Argentina", "Chile", "Colombia", "Mexico", "Portug
 export function CreateAccountPage() {
   const navigate = useNavigate();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError("");
+
+    if (password !== confirm) {
+      setError("As senhas não conferem.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const session = await register({ name, email, password });
+      setSession(session);
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao criar conta.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -46,7 +72,13 @@ export function CreateAccountPage() {
           <form className="create-account-form" onSubmit={handleSubmit}>
             <label className="create-account-field">
               <span>Nome Completo:</span>
-              <input type="text" autoComplete="name" />
+              <input
+                type="text"
+                autoComplete="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </label>
 
             <label className="create-account-field">
@@ -77,21 +109,43 @@ export function CreateAccountPage() {
 
             <label className="create-account-field">
               <span>Email:</span>
-              <input type="email" autoComplete="email" />
+              <input
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </label>
 
             <label className="create-account-field">
               <span>Senha:</span>
-              <input type="password" autoComplete="new-password" />
+              <input
+                type="password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                required
+              />
             </label>
 
             <label className="create-account-field">
               <span>Confirmação da senha:</span>
-              <input type="password" autoComplete="new-password" />
+              <input
+                type="password"
+                autoComplete="new-password"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                minLength={6}
+                required
+              />
             </label>
 
-            <button className="create-account-submit" type="submit">
-              Criar uma conta
+            {error && <p className="create-account-error" style={{ color: "#ef4444", textAlign: "center" }}>{error}</p>}
+
+            <button className="create-account-submit" type="submit" disabled={loading}>
+              {loading ? "Criando..." : "Criar uma conta"}
             </button>
 
             <div className="create-account-divider">

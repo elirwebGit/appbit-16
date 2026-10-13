@@ -13,9 +13,10 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { ConsultaIAView } from "./pages/ConsultaIAView";
 import PainelView from "./pages/PainelView";
 import { DashboardProvider } from "./contexts/DashboardContext";
+import { getToken } from "./services/api";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  const isAuthenticated = !!getToken();
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 }

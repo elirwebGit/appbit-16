@@ -70,4 +70,14 @@ model Employment {
   region               Region @relation(fields: [regionId], references: [id])
 }
 
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("user")
+  createdAt    DateTime @default(now())
+}
+
+
 

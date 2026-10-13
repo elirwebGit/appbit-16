@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcryptjs";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -134,6 +135,20 @@ async function main() {
   await prisma.regionIndicator.deleteMany();
   await prisma.aIAnalysis.deleteMany();
   await prisma.region.deleteMany();
+
+  console.log("Seeding admin user...");
+  const adminEmail = process.env.ADMIN_EMAIL ?? "admin@appbit.com";
+  const adminPassword = process.env.ADMIN_PASSWORD ?? "123456";
+  await prisma.user.upsert({
+    where: { email: adminEmail },
+    update: { passwordHash: bcrypt.hashSync(adminPassword, 10) },
+    create: {
+      name: "Administrador",
+      email: adminEmail,
+      passwordHash: bcrypt.hashSync(adminPassword, 10),
+      role: "admin",
+    },
+  });
 
   console.log("Seeding regions and indicators...");
   const createdRegions: Record<string, any> = {};

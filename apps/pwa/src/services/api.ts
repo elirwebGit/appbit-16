@@ -2,6 +2,82 @@ import type { RegiaoMapa, AIAnalysisResponse, AIQueryResponse, AnalysisHistoryIt
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 
+// ─── Auth (JWT) ───────────────────────────────────────────────────────────────
+const TOKEN_KEY = "appbit.token";
+const USER_KEY = "appbit.user";
+
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export interface AuthResponse {
+  token: string;
+  user: AuthUser;
+}
+
+export function getToken(): string | null {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function getStoredUser(): AuthUser | null {
+  const raw = localStorage.getItem(USER_KEY);
+  return raw ? (JSON.parse(raw) as AuthUser) : null;
+}
+
+export function setSession(session: AuthResponse | null): void {
+  if (session) {
+    localStorage.setItem(TOKEN_KEY, session.token);
+    localStorage.setItem(USER_KEY, JSON.stringify(session.user));
+  } else {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+  }
+}
+
+export function authHeaders(extra: Record<string, string> = {}): Record<string, string> {
+  const token = getToken();
+  return token ? { ...extra, Authorization: `Bearer ${token}` } : extra;
+}
+
+export async function login(email: string, password: string): Promise<AuthResponse> {
+  const res = await fetch(`${BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({ message: "Falha no login" }));
+    throw new Error(data.message || "Falha no login");
+  }
+  return res.json();
+}
+
+export async function register(data: {
+  name: string;
+  email: string;
+  password: string;
+}): Promise<AuthResponse> {
+  const res = await fetch(`${BASE_URL}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ message: "Falha ao cadastrar" }));
+    throw new Error(err.message || "Falha ao cadastrar");
+  }
+  return res.json();
+}
+
+export async function getMe(): Promise<AuthUser> {
+  const res = await fetch(`${BASE_URL}/auth/me`, { headers: authHeaders() });
+  if (!res.ok) throw new Error("Não autenticado");
+  return res.json();
+}
+
 export async function getDashboard() {
   const res = await fetch(`${BASE_URL}/dashboard`);
   if (!res.ok) throw new Error(`Dashboard request failed: ${res.status}`);
