@@ -8,7 +8,7 @@ import {
   Send,
 } from "lucide-react";
 import type { Mensagem } from "../types/visent";
-import { getHistory } from "../services/api";
+import { analyzeQuestion } from "../services/api";
 import MarkdownMessage from "../components/MarkdownMessage";
 import OfflineBanner from "../components/OfflineBanner";
 import MapaVisent from "../components/MapaVisent";
@@ -123,7 +123,7 @@ export default function HistoryPage() {
     setTextoInput("");
 
     try {
-      const response = await getHistory();
+      const response = await analyzeQuestion(textoInput);
 
       const respostaIA: Mensagem = {
         id: Date.now() + 1,

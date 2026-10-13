@@ -1,8 +1,7 @@
 import { Router } from "express";
-import { PrismaClient } from "@infrastructure/prisma/client";
+import { prisma } from "@infrastructure/prisma/client";
 
 const regionIndicatorsRouter = Router();
-const prisma = new PrismaClient();
 
 /**
  * @swagger

@@ -11,6 +11,8 @@ import { regionIndicatorsRouter } from "@adapters/routes/regionIndicatorsRouter"
 import cors from "cors";
 import { formationRoute } from "@adapters/routes/formationRoute";
 import { employmentRoute } from "@adapters/routes/employmentRoute";
+import { storageRoute } from "@adapters/routes/storageRoute";
+import { functionsRoute } from "@adapters/routes/functionsRoute";
 const app = express();
 
 app.use(express.json());
@@ -45,6 +47,8 @@ app.use("/api/region", regionIndicatorsRouter);
 app.use("/api/formation", formationRoute);
 app.use("/api/employment", employmentRoute);
 app.use("/api/ai", aiRouter);
+app.use("/api/storage", storageRoute);
+app.use("/api/functions", functionsRoute);
 
 // Health
 app.get("/health", (_req, res) => {

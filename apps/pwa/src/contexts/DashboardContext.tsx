@@ -1,16 +1,10 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import type { ReactNode } from 'react';
 import { dashboardService } from '../services/dashboardService';
 import type { RegiaoMapa, Mensagem, InsightCard } from '../types/visent';
 
 interface ActiveFilters {
   [key: string]: any;
-}
-
-// ── AI-related state (prepared for future AIContext extraction) ──────────────
-interface AIState {
-  aiMessages: Mensagem[];
-  aiInsights: InsightCard[];
-  isAiLoading: boolean;
 }
 
 // ── Full context interface ──────────────────────────────────────────────────
