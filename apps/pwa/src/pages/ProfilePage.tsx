@@ -1,9 +1,16 @@
-import { ChevronLeft, Pencil } from "lucide-react";
+import { ChevronLeft, Pencil, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { getStoredUser, setSession } from "../services/api";
 import "./Profile.css";
 
 export function ProfilePage() {
   const navigate = useNavigate();
+  const user = getStoredUser();
+
+  function handleLogout() {
+    setSession(null);
+    navigate("/login");
+  }
 
   return (
     <main className="profile-page">
@@ -42,7 +49,7 @@ export function ProfilePage() {
           </div>
 
           <div className="profile-card-body">
-            <h2 className="profile-name">Nome Completo</h2>
+            <h2 className="profile-name">{user?.name ?? "Usuário"}</h2>
 
             <div className="profile-details">
               <div className="profile-detail-row">
@@ -63,7 +70,7 @@ export function ProfilePage() {
                 <div className="profile-detail-label-wrapper">
                   <span className="profile-detail-label">Cargo:</span>
                 </div>
-                <span className="profile-detail-value">Gestor Público</span>
+                <span className="profile-detail-value">{user?.role ?? "—"}</span>
               </div>
               
               <div className="profile-detail-row">
@@ -77,9 +84,25 @@ export function ProfilePage() {
                 <div className="profile-detail-label-wrapper">
                   <span className="profile-detail-label">Email:</span>
                 </div>
-                <span className="profile-detail-value">nomecompleto@gmail.com</span>
+                <span className="profile-detail-value">{user?.email ?? "—"}</span>
               </div>
             </div>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="profile-logout"
+              style={{
+                marginTop: "20px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                cursor: "pointer",
+              }}
+            >
+              <LogOut size={18} />
+              <span>Sair da conta</span>
+            </button>
           </div>
         </section>
       </div>

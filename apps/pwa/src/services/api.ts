@@ -78,14 +78,18 @@ export async function getMe(): Promise<AuthUser> {
   return res.json();
 }
 
+// ─── Dados (exigem Bearer token) ──────────────────────────────────────────────
+
 export async function getDashboard() {
-  const res = await fetch(`${BASE_URL}/dashboard`);
+  const res = await fetch(`${BASE_URL}/dashboard`, { headers: authHeaders() });
   if (!res.ok) throw new Error(`Dashboard request failed: ${res.status}`);
   return res.json();
 }
 
 export async function getRegionIndicators(regionId: string) {
-  const res = await fetch(`${BASE_URL}/region/${regionId}/indicators`);
+  const res = await fetch(`${BASE_URL}/region/${regionId}/indicators`, {
+    headers: authHeaders(),
+  });
   if (!res.ok) throw new Error(`Region indicators request failed: ${res.status}`);
   return res.json();
 }
@@ -96,9 +100,7 @@ export async function crossRegionAnalysis(
 ) {
   const res = await fetch(`${BASE_URL}/cross-region`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ regionAId, regionBId }),
   });
   if (!res.ok) throw new Error(`Cross-region analysis failed: ${res.status}`);
@@ -113,9 +115,7 @@ export async function crossRegionAnalysis(
 export async function analyzeQuestion(question: string): Promise<AIAnalysisResponse> {
   const res = await fetch(`${BASE_URL}/regions/analysis`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ question }),
   });
   if (!res.ok) throw new Error(`Analysis request failed: ${res.status}`);
@@ -127,7 +127,7 @@ export async function analyzeQuestion(question: string): Promise<AIAnalysisRespo
  * Returns all registered regions formatted for the map (Leaflet).
  */
 export async function getRegionsForMap(): Promise<RegiaoMapa[]> {
-  const res = await fetch(`${BASE_URL}/regions`);
+  const res = await fetch(`${BASE_URL}/regions`, { headers: authHeaders() });
   if (!res.ok) throw new Error(`Regions request failed: ${res.status}`);
   return res.json();
 }
@@ -137,7 +137,7 @@ export async function getRegionsForMap(): Promise<RegiaoMapa[]> {
  * Returns history of AI analyses performed.
  */
 export async function getHistory(): Promise<AnalysisHistoryItem[]> {
-  const res = await fetch(`${BASE_URL}/analysis/history`);
+  const res = await fetch(`${BASE_URL}/analysis/history`, { headers: authHeaders() });
   if (!res.ok) throw new Error(`History request failed: ${res.status}`);
   return res.json();
 }
@@ -149,9 +149,7 @@ export async function getHistory(): Promise<AnalysisHistoryItem[]> {
 export async function createRegion(data: { name: string; state: string; country: string }) {
   const res = await fetch(`${BASE_URL}/regions`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error(`Create region failed: ${res.status}`);
@@ -165,6 +163,7 @@ export async function createRegion(data: { name: string; state: string; country:
 export async function deleteRegion(id: string) {
   const res = await fetch(`${BASE_URL}/regions/${id}`, {
     method: "DELETE",
+    headers: authHeaders(),
   });
   if (!res.ok) throw new Error(`Delete region failed: ${res.status}`);
   return res.json();
@@ -177,9 +176,7 @@ export async function deleteRegion(id: string) {
 export async function aiQuery(question: string): Promise<AIQueryResponse> {
   const res = await fetch(`${BASE_URL}/ai/query`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ question }),
   });
   if (!res.ok) throw new Error(`AI query failed: ${res.status}`);
@@ -189,9 +186,7 @@ export async function aiQuery(question: string): Promise<AIQueryResponse> {
 export async function formationQuestion(question: string) {
   const res = await fetch(`${BASE_URL}/formation`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ question }),
   });
   if (!res.ok) throw new Error(`Formation question failed: ${res.status}`);
@@ -201,9 +196,7 @@ export async function formationQuestion(question: string) {
 export async function employmentQuestion(question: string) {
   const res = await fetch(`${BASE_URL}/employment`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ question }),
   });
   if (!res.ok) throw new Error(`Employment question failed: ${res.status}`);

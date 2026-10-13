@@ -14,6 +14,7 @@ import { employmentRoute } from "@adapters/routes/employmentRoute";
 import { storageRoute } from "@adapters/routes/storageRoute";
 import { functionsRoute } from "@adapters/routes/functionsRoute";
 import { authRouter } from "@adapters/routes/authRoutes";
+import { authMiddleware } from "@adapters/middleware/authMiddleware";
 const app = express();
 
 app.use(express.json());
@@ -39,18 +40,18 @@ app.use(
 // Swagger
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Routes
-app.use("/api/regions", region);
-app.use("/api/analysis", analysisRouter);
-app.use("/api/cross-region", crossRegionRouter);
-app.use("/api/dashboard", dashboardRouter);
-app.use("/api/region", regionIndicatorsRouter);
-app.use("/api/formation", formationRoute);
-app.use("/api/employment", employmentRoute);
-app.use("/api/ai", aiRouter);
-app.use("/api/storage", storageRoute);
-app.use("/api/functions", functionsRoute);
+// Routes (auth público; dados exigem Bearer token)
 app.use("/api/auth", authRouter);
+app.use("/api/regions", authMiddleware, region);
+app.use("/api/analysis", authMiddleware, analysisRouter);
+app.use("/api/cross-region", authMiddleware, crossRegionRouter);
+app.use("/api/dashboard", authMiddleware, dashboardRouter);
+app.use("/api/region", authMiddleware, regionIndicatorsRouter);
+app.use("/api/formation", authMiddleware, formationRoute);
+app.use("/api/employment", authMiddleware, employmentRoute);
+app.use("/api/ai", authMiddleware, aiRouter);
+app.use("/api/storage", authMiddleware, storageRoute);
+app.use("/api/functions", authMiddleware, functionsRoute);
 
 // Health
 app.get("/health", (_req, res) => {
