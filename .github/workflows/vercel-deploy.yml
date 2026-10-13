@@ -21,8 +21,17 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Check VERCEL_TOKEN
+        id: check
+        run: echo "present=${{ secrets.VERCEL_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to Vercel (production)
+        if: steps.check.outputs.present == 'true'
         working-directory: apps/pwa
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: npx --yes vercel@latest deploy --prod --yes --token="$VERCEL_TOKEN"
+
+      - name: Skip notice
+        if: steps.check.outputs.present != 'true'
+        run: echo "VERCEL_TOKEN secret not set — skipping deploy. Add it in Settings → Secrets → Actions."
