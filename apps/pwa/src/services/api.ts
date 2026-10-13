@@ -1,11 +1,6 @@
-import type {
-  RegiaoMapa,
-  AIAnalysisResponse,
-  AIQueryResponse,
-  AnalysisHistoryItem,
-} from "../types/visent";
+import type { RegiaoMapa, AIAnalysisResponse, AIQueryResponse, AnalysisHistoryItem } from '../types/visent';
 
-const BASE_URL = import.meta.env.PORT ?? "http://localhost:3000/api";
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 
 export async function getDashboard() {
   const res = await fetch(`${BASE_URL}/dashboard`);
@@ -14,9 +9,8 @@ export async function getDashboard() {
 }
 
 export async function getRegionIndicators(regionId: string) {
-  const res = await fetch(`${BASE_URL}/regions/${regionId}/indicators`);
-  if (!res.ok)
-    throw new Error(`Region indicators request failed: ${res.status}`);
+  const res = await fetch(`${BASE_URL}/region/${regionId}/indicators`);
+  if (!res.ok) throw new Error(`Region indicators request failed: ${res.status}`);
   return res.json();
 }
 
@@ -24,7 +18,7 @@ export async function crossRegionAnalysis(
   regionAId: string,
   regionBId: string,
 ) {
-  const res = await fetch(`${BASE_URL}/analysis/cross-region`, {
+  const res = await fetch(`${BASE_URL}/cross-region`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,9 +34,7 @@ export async function crossRegionAnalysis(
  * Sends question to region-aware AI (uses real region data as context).
  * This is the primary AI endpoint for the application.
  */
-export async function analyzeQuestion(
-  question: string,
-): Promise<AIAnalysisResponse> {
+export async function analyzeQuestion(question: string): Promise<AIAnalysisResponse> {
   const res = await fetch(`${BASE_URL}/regions/analysis`, {
     method: "POST",
     headers: {
@@ -78,11 +70,7 @@ export async function getHistory(): Promise<AnalysisHistoryItem[]> {
  * POST /api/regions
  * Creates a new region. Backend expects { name, state, country }.
  */
-export async function createRegion(data: {
-  name: string;
-  state: string;
-  country: string;
-}) {
+export async function createRegion(data: { name: string; state: string; country: string }) {
   const res = await fetch(`${BASE_URL}/regions`, {
     method: "POST",
     headers: {

@@ -36,7 +36,6 @@ function insightCategoryStyle(category: InsightCard['category']) {
 export function ConsultaIAView() {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [aiResponse, setAiResponse] = useState<string | null>(null);
   const { 
     mapData, 
     selectedRegionIds, 
