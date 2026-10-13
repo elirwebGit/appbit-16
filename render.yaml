@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: appbit-api
+    runtime: node
+    plan: free
+    region: virginia
+    branch: main
+    rootDir: apps/api
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
