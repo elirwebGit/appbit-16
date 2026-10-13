@@ -39,3 +39,6 @@ tsconfig.tsbuildinfo
 /telas-codigo
 /Plano-codex
 /img-referencia
+
+.vercel
+.env*
