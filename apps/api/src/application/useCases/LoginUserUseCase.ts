@@ -1,6 +1,7 @@
 import { PrismaUserRepository } from "@infrastructure/repositories/PrismaUserRepository";
 import { verifyPassword } from "@infrastructure/auth/password";
 import { signToken } from "@infrastructure/auth/token";
+import { toPublicUser } from "./RegisterUserUseCase";
 
 interface LoginInput {
   email: string;
@@ -25,9 +26,6 @@ export class LoginUserUseCase {
 
     const token = signToken({ sub: user.id, email: user.email, role: user.role });
 
-    return {
-      token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role },
-    };
+    return { token, user: toPublicUser(user) };
   }
 }

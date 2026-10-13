@@ -1,0 +1,88 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   NEXO Design Tokens — alinhados ao Style Guide (Montserrat + paleta da marca)
+   Estes tokens são aditivos; não substituem os --app-* por enquanto.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Paleta da marca (extraída do Style Guide) */
+  --nexo-yellow: #f7df59;
+  --nexo-yellow-strong: #eea056;
+  --nexo-orange: #df7149;
+  --nexo-green: #8ac475;
+  --nexo-olive: #6b7a3f;
+  --nexo-ink: #232323;
+  --nexo-ink-strong: #040404;
+  --nexo-paper: #fffbf5;
+  --nexo-card: #ffffff;
+  --nexo-border: #ece7df;
+
+  /* Semântica */
+  --nexo-text: var(--nexo-ink);
+  --nexo-text-muted: #8a8a8a;
+  --nexo-primary: var(--nexo-ink);
+  --nexo-cta: var(--nexo-yellow);
+  --nexo-cta-hover: var(--nexo-yellow-strong);
+  --nexo-success: var(--nexo-green);
+  --nexo-danger: #ef4444;
+  --nexo-warning: #f7df59;
+
+  /* Efeito vidro (popovers, modais, legenda) */
+  --nexo-glass-bg: rgba(255, 255, 255, 0.6);
+  --nexo-glass-border: rgba(255, 255, 255, 0.65);
+  --nexo-glass-blur: blur(14px) saturate(140%);
+  --nexo-glass-shadow: 0 10px 30px rgba(35, 35, 35, 0.12);
+
+  /* Movimento */
+  --nexo-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --nexo-dur-fast: 160ms;
+  --nexo-dur: 260ms;
+  --nexo-dur-slow: 520ms;
+
+  /* Sombras de card */
+  --nexo-shadow-card: var(--app-shadow-sm);
+  --nexo-shadow-card-hover: 0 6px 20px rgba(35, 35, 35, 0.12);
+
+  /* Escala tipográfica */
+  --nexo-fs-12: 12px;
+  --nexo-fs-14: 14px;
+  --nexo-fs-16: 16px;
+  --nexo-fs-18: 18px;
+  --nexo-fs-20: 20px;
+  --nexo-fs-24: 24px;
+  --nexo-fs-32: 32px;
+
+  /* Layout */
+  --nexo-nav-h: 80px;
+  --nexo-sidebar-w: 280px;
+  --nexo-tap: 44px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nexo-nav-h: 60px;
+  }
+}
+
+/* Superfície com efeito vidro reutilizável */
+.nexo-glass {
+  background: var(--nexo-glass-bg);
+  -webkit-backdrop-filter: var(--nexo-glass-blur);
+  backdrop-filter: var(--nexo-glass-blur);
+  border: 1px solid var(--nexo-glass-border);
+  box-shadow: var(--nexo-glass-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nexo-dur-fast: 0ms;
+    --nexo-dur: 0ms;
+    --nexo-dur-slow: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

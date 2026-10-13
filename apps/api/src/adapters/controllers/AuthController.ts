@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RegisterUserUseCase } from "@application/useCases/RegisterUserUseCase";
+import { RegisterUserUseCase, toPublicUser } from "@application/useCases/RegisterUserUseCase";
 import { LoginUserUseCase } from "@application/useCases/LoginUserUseCase";
 import { PrismaUserRepository } from "@infrastructure/repositories/PrismaUserRepository";
 
@@ -35,12 +35,7 @@ export class AuthController {
       if (!user) {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
-      return res.json({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      });
+      return res.json(toPublicUser(user));
     } catch (error: any) {
       return res.status(500).json({ message: error.message || "Erro interno" });
     }

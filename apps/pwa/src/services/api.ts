@@ -11,6 +11,10 @@ export interface AuthUser {
   name: string;
   email: string;
   role: string;
+  birthDate?: string | null;
+  country?: string | null;
+  jobTitle?: string | null;
+  institution?: string | null;
 }
 
 export interface AuthResponse {
@@ -59,6 +63,10 @@ export async function register(data: {
   name: string;
   email: string;
   password: string;
+  birthDate: string;
+  country: string;
+  jobTitle?: string;
+  institution?: string;
 }): Promise<AuthResponse> {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",

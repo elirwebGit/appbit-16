@@ -1,0 +1,79 @@
+.app-sidebar {
+  width: var(--nexo-sidebar-w);
+  background: #fff;
+  border-right: 1px solid var(--nexo-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-shrink: 0;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.04);
+  z-index: 20;
+}
+
+.app-sidebar-toggle,
+.app-sidebar-close {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(88vw, 320px);
+    transform: translateX(-100%);
+    transition: transform var(--nexo-dur) var(--nexo-ease);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+    z-index: 40;
+    padding-top: 8px;
+  }
+
+  .app-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .app-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(35, 35, 35, 0.4);
+    z-index: 39;
+    animation: backdrop-in var(--nexo-dur-fast) var(--nexo-ease);
+  }
+
+  .app-sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    top: calc(var(--nexo-nav-h) + 10px);
+    left: 12px;
+    z-index: 30;
+    min-height: var(--nexo-tap);
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid var(--nexo-border);
+    border-radius: 999px;
+    box-shadow: var(--app-shadow-sm);
+    font-weight: 600;
+    color: var(--nexo-ink);
+    cursor: pointer;
+  }
+
+  .app-sidebar-close {
+    display: inline-flex;
+    align-self: flex-end;
+    margin: 6px 12px 0;
+    padding: 6px 10px;
+    background: transparent;
+    border: none;
+    color: var(--nexo-text-muted);
+    cursor: pointer;
+  }
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

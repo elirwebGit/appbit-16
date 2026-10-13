@@ -5,6 +5,7 @@ import ReloadPrompt from "../components/ReloadPrompt";
 import { Navbar } from "../components/Navbar";
 
 import { RegionCard, IndicatorCard, HistoryCard } from "../components/SidebarCards";
+import { SidebarShell } from "../components/SidebarShell";
 import { ChatPopover } from "../components/ChatPopover";
 import { ExportPopover } from "../components/ExportPopover";
 import { useDashboard } from "../contexts/DashboardContext";
@@ -84,25 +85,14 @@ export function ConsultaIAView() {
   const lastResponse = latestIaMessages.length > 0 ? latestIaMessages[latestIaMessages.length - 1] : null;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100vw", backgroundColor: "#f1f5f9", overflow: "hidden" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100vw", backgroundColor: "var(--nexo-paper)", overflow: "hidden" }}>
       <OfflineBanner />
       <Navbar />
 
       <div style={{ display: "flex", flex: 1, minHeight: 0, position: "relative" }}>
         
         {/* Left Column - Independent Cards */}
-        <div style={{
-          width: 280,
-          backgroundColor: "#ffffff",
-          borderRight: "1px solid #e2e8f0",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          flexShrink: 0,
-          overflowY: "auto",
-          boxShadow: "2px 0 10px rgba(0, 0, 0, 0.05)",
-          zIndex: 10
-        }}>
+        <SidebarShell>
           <RegionCard 
             countryName="Brasil"
             regions={regions} 
@@ -131,7 +121,7 @@ export function ConsultaIAView() {
               <Download size={18} /> Exportar
             </button>
           </div>
-        </div>
+        </SidebarShell>
 
         <main style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", padding: "40px 20px", overflowY: "auto", position: "relative" }}>
           

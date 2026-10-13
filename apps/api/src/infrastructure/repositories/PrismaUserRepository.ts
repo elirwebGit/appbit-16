@@ -14,6 +14,10 @@ export class PrismaUserRepository {
     email: string;
     passwordHash: string;
     role?: string;
+    birthDate?: Date | null;
+    country?: string | null;
+    jobTitle?: string | null;
+    institution?: string | null;
   }) {
     return prisma.user.create({ data });
   }

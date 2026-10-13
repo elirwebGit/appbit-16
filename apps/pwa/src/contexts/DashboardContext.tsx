@@ -2,9 +2,16 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import type { ReactNode } from 'react';
 import { dashboardService } from '../services/dashboardService';
 import type { RegiaoMapa, Mensagem, InsightCard } from '../types/visent';
+import { ActionToast } from '../components/ActionToast';
 
 interface ActiveFilters {
   [key: string]: any;
+}
+
+export interface ActionNotice {
+  id: number;
+  type: "success" | "error" | "info";
+  message: string;
 }
 
 // ── Full context interface ──────────────────────────────────────────────────
@@ -17,6 +24,8 @@ interface DashboardContextData {
   historyItems: { id: string; label: string }[];
   isLoading: boolean;
   error: string | null;
+  notice: ActionNotice | null;
+  clearNotice: () => void;
 
   // Region actions
   toggleRegion: (id: string) => void;
@@ -44,6 +53,12 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
   const [historyItems, setHistoryItems] = useState<{ id: string; label: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<ActionNotice | null>(null);
+
+  const notify = useCallback((type: ActionNotice["type"], message: string) => {
+    setNotice({ id: Date.now(), type, message });
+  }, []);
+  const clearNotice = useCallback(() => setNotice(null), []);
 
   // ── AI state (grouped for future AIContext extraction) ─────────────────
   const [aiMessages, setAiMessages] = useState<Mensagem[]>([
@@ -64,12 +79,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
       setError(null);
       try {
-        console.log("[DashboardContext] Fetching map data (getRegions) and history...");
-        
-        const regionsPromise = dashboardService.getRegions().then(res => {
-          console.log("[DashboardContext] Resposta recebida da API getRegions:", res);
-          return res;
-        });
+        const regionsPromise = dashboardService.getRegions();
 
         const historyPromise = dashboardService.getHistory().catch(err => {
           console.warn("[DashboardContext] Erro ao carregar histórico (getHistory). Ignorando falha para não quebrar o mapa.", err);
@@ -82,7 +92,6 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
         ]);
         
         if (active) {
-          console.log("[DashboardContext] Estado mapData a ser atualizado antes de renderizar:", regions);
           setMapData(regions);
           setHistoryItems(history);
         }
@@ -124,36 +133,35 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
   const addRegion = useCallback(async (data: { name: string; state: string; country: string }) => {
     try {
       setIsLoading(true);
-      setError(null);
-      console.log("[DashboardContext] Payload enviado para API (addRegion):", data);
       await dashboardService.addRegion(data);
       // Re-fetch from API to maintain SSOT
       const regions = await dashboardService.getRegions();
       setMapData(regions);
+      notify("success", `Região "${data.name}" adicionada.`);
     } catch (err) {
       console.error("Erro ao adicionar região:", err);
-      setError("Não foi possível adicionar a região.");
+      notify("error", "Não foi possível adicionar a região.");
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [notify]);
 
   const removeRegion = useCallback(async (id: string) => {
     try {
       setIsLoading(true);
-      setError(null);
       await dashboardService.removeRegion(id);
       // Clean up selected IDs and re-fetch from API
       setSelectedRegionIds(prev => prev.filter(r => r !== id));
       const regions = await dashboardService.getRegions();
       setMapData(regions);
+      notify("success", "Região removida.");
     } catch (err) {
       console.error("Erro ao remover região:", err);
-      setError("Não foi possível remover a região.");
+      notify("error", "Não foi possível remover a região.");
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [notify]);
 
   // ── AI actions (grouped for future AIContext extraction) ───────────────
 
@@ -234,6 +242,8 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
       historyItems,
       isLoading,
       error,
+      notice,
+      clearNotice,
       toggleRegion,
       setIndicator,
       setFilter,
@@ -248,6 +258,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
       generateInsights,
     }}>
       {children}
+      <ActionToast notice={notice} onClose={clearNotice} />
     </DashboardContext.Provider>
   );
 }
