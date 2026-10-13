@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  z-index: 0; /* cria stacking context: a dica não sobrepõe o sidebar/modal */
   font-family: 'Montserrat', sans-serif;
 }
 
