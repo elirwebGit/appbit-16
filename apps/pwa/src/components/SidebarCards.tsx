@@ -48,7 +48,8 @@ export function CollapsibleCard({
 
 // 1. Region Card
 interface Region {
-  id: string;
+  id: string;      // UUID no banco — usado para excluir
+  key: string;     // identificador da seleção (nome da região)
   name: string;
   selected: boolean;
 }
@@ -90,9 +91,9 @@ export function RegionCard({ countryName, regions, onToggleRegion, onAddRegion, 
         <h4 className="region-country">{countryName}</h4>
         {regions.map(r => (
           <div 
-            key={r.id} 
+            key={r.key} 
             className={`region-item ${r.selected ? 'selected' : ''}`}
-            onClick={() => onToggleRegion(r.id)}
+            onClick={() => onToggleRegion(r.key)}
           >
             <span>{r.name}</span>
             {r.selected && (
@@ -101,7 +102,7 @@ export function RegionCard({ countryName, regions, onToggleRegion, onAddRegion, 
                 alt="Remover do filtro" 
                 onClick={(e) => {
                   e.stopPropagation();
-                  onToggleRegion(r.id);
+                  onToggleRegion(r.key);
                 }}
                 style={{ width: '12px', height: '12px', opacity: 0.6 }}
               />

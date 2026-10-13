@@ -112,18 +112,22 @@ export default function MapaVisent() {
 
   const hasAnySelection = selectedRegionIds.length > 0;
 
-  // Compute styles for all regions using the decoupled style layer
+  // No mapa, exibir apenas as regiões selecionadas na lista lateral
+  const visibleRegions = useMemo(
+    () =>
+      hasAnySelection
+        ? dadosRegioes.filter((r) => selectedRegionIds.includes(r.regiao))
+        : [],
+    [dadosRegioes, selectedRegionIds, hasAnySelection],
+  );
+
+  // Compute styles for the visible (selected) regions
   const regionStyles = useMemo(() => {
-    return dadosRegioes.map(regiao => ({
+    return visibleRegions.map((regiao) => ({
       regiao,
-      style: computeRegionStyle(
-        regiao,
-        activeIndicatorId,
-        selectedRegionIds.includes(regiao.regiao),
-        hasAnySelection,
-      ),
+      style: computeRegionStyle(regiao, activeIndicatorId, true, true),
     }));
-  }, [dadosRegioes, activeIndicatorId, selectedRegionIds, hasAnySelection]);
+  }, [visibleRegions, activeIndicatorId]);
 
   // Centro estratégico entre SP e RJ para os dois aparecerem na tela ao mesmo tempo
   const posicaoCentro: [number, number] = [-23.30, -45.30]
@@ -144,20 +148,45 @@ export default function MapaVisent() {
         </div>
       )}
 
+      {!hasAnySelection && !isLoading && (
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "rgba(255,255,255,0.92)",
+            border: "1px solid #e2e8f0",
+            borderRadius: "12px",
+            padding: "20px 28px",
+            textAlign: "center",
+            color: "#475569",
+            zIndex: 500,
+            maxWidth: 360,
+            boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+          }}
+        >
+          <strong style={{ display: "block", color: "#1e293b", marginBottom: 6 }}>
+            Nenhuma região selecionada
+          </strong>
+          Selecione regiões na lista ao lado para exibi-las no mapa.
+        </div>
+      )}
+
       <MapContainer 
         center={posicaoCentro} 
         zoom={7}
         style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
         <MapResizer />
-        {/* Camada do mapa com estilo claro (CartoDB Positron) */}
+        {/* Camada do mapa — OpenStreetMap (sem API key) */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         {regionStyles.map(({ regiao, style }) => {
-          const isSelected = selectedRegionIds.includes(regiao.regiao);
+          const isSelected = true;
 
           return (
             <Fragment key={regiao.regiao}>

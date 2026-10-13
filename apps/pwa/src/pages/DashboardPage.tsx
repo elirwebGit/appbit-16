@@ -25,7 +25,8 @@ function DashboardContent() {
 
   // Transform mapData into regions for RegionCard
   const regions = mapData.map(r => ({
-    id: r.regiao,
+    id: r.id,
+    key: r.regiao,
     name: r.nome_exibicao,
     selected: selectedRegionIds.includes(r.regiao)
   }));

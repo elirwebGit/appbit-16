@@ -14,6 +14,7 @@ const DISPLAY_NAMES: Record<string, string> = {
 };
 
 export interface RegiaoMapa {
+  id: string;
   regiao: string;
   nome_exibicao: string;
   lat: number;
@@ -53,6 +54,7 @@ export class GetMapRegionsUseCase {
       const mainInd = indicators[0];
 
       return {
+        id: region.id,
         regiao: region.name,
         nome_exibicao: DISPLAY_NAMES[region.name] || region.name,
         lat: region.latitude ?? 0,

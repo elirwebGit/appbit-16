@@ -1,4 +1,5 @@
 export interface RegiaoMapa {
+  id: string;
   regiao: string;
   nome_exibicao: string;
   lat: number;
